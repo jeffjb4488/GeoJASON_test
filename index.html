@@ -51,10 +51,10 @@
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-119.0977191, 46.2465524]
+                        coordinates: [-70.5634919442989, 41.461855825564314]
                     },
                     properties: {
-                        title: 'Popup 1',
+                        title: 'Dempster Park',
                         description: 'Hello World!',
                         time: '1992/01'
                     }
@@ -63,10 +63,10 @@
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-119.201977, 46.257038]
+                        coordinates: [-70.56631128323484, 41.461459233506794]
                     },
                     properties: {
-                        title: 'Popup 2',
+                        title: 'Shearer Cottage',
                         description: 'Hello again, World!',
                         time: '1992/07'
                     }
@@ -75,10 +75,10 @@
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-119.1080419, 46.2309332]
+                        coordinates: [-70.56296705559068, 41.45896546613431]
                     },
                     properties: {
-                        title: 'Popup 3',
+                        title: 'Washington Park',
                         description: 'Hello once again, World!',
                         time: '1992/06'
                     }
@@ -86,7 +86,7 @@
             ];
 
             // Generate the map and set its initial view
-        	var map1 = L.map('myMap').setView([46.26,-119.15], 12);
+        	var map1 = L.map('myMap').setView([41.46095948255622, -70.56500016985883], 12);
             L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map1);
@@ -104,7 +104,7 @@
             var group1 = L.geoJSON(dataset1, optionsObject);
 
             // Create the second geoJSON layer from external file
-            $.getJSON("data/popups.json", function(json) {
+            $.getJSON("1890_parcles_Test_export.geojson", function(json) {
                 var group2 = L.geoJSON(json, optionsObject);
 
             // Set the time attribute for each group
