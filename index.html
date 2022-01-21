@@ -45,27 +45,58 @@
     </head>
     <body>
         <!--Create the map div container-->
-        <div id="myMap">Test this text.</div>
+        <div id="map">Test this text.</div>
         <script>
             
                       // Generate the map and set its initial view
         	    
-            var crs = new L.Proj.CRS('EPSG:2400',
-  '+lon_0=15.808277777799999 +lat_0=0.0 +k=1.0 +x_0=1500000.0 ' +
-  '+y_0=0.0 +proj=tmerc +ellps=bessel +units=m ' +
-  '+towgs84=414.1,41.3,603.1,-0.855,2.141,-7.023,0 +no_defs',
-  {
-    resolutions: [8192, 4096, 2048] // 3 example zoom level resolutions
-  }
-);
-            
-var map = L.map('myMap', {
-  crs: crs,
-  continuousWorld: true,
-  worldCopyJump: false
-});
+         var crs3057 = new L.Proj.CRS('EPSG:3057',
+    '+proj=lcc +lat_1=64.25 +lat_2=65.75 +lat_0=65 +lon_0=-19 +x_0=500000+y_0=500000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
+    {
+          transformation: L.Transformation(1, -7000000.0, -1, 11000000.0),
+          origin: [-7000000, 11000000],
+      		resolutions: [
+		        10583.354500042335,
+		        7937.5158750317505,
+		        3968.7579375158753,
+		        2645.8386250105837,
+		        1587.5031750063501,
+		        1058.3354500042335,
+		        529.1677250021168,
+		        264.5838625010584,
+		        132.2919312505292,
+		        66.1459656252646,
+		        26.458386250105836,
+		        13.229193125052918,
+		        6.614596562526459,
+		        2.6458386250105836,
+		        1.3229193125052918,]
+		    }
+      );
 
-L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png').addTo(map);
+map = new L.Map('map', {
+  crs: crs3057});
+
+var IMO_basemap = L.tileLayer('https://luk.vedur.is/arcgis/rest/services/grunnkort/grunnkort_cache_isn93/MapServer/tile/{z}/{y}/{x}', {
+		maxZoom: 15,
+		minZoom: 5,
+		attribution: 'Icelandic Met Office | National Land Survey of Iceland | © OpenStreetMap contributors',
+    tileSize: 512,
+    noWrap: true,
+    continuousWorld: true
+	}).addTo(map);
+
+toponyms = new L.tileLayer('https://luk.vedur.is/arcgis/rest/services/ornefni/ornefni_cache_isn93/MapServer/tile/{z}/{y}/{x}',{
+		maxZoom: 13,
+		minZoom: 5,
+		tileSize: 512,
+		noWrap: true,
+		continuousWorld: true
+		}).addTo(map);
+
+
+map.setView([64.9, -18.5], 6);
+
             
 );
             // Start with geoJSON data
