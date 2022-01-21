@@ -1,108 +1,109 @@
-<html lang="en">
-    <head>
-        <!--jquery js-->
-        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<html lang="en" >
 
-        <!--jQuery UI files-->
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+<head>
 
-        <!--jQuery UI Touch js, required for touchscreen use-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
 
-        <!-- leaflet files -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-        
-    <script src="js/lib/proj4-compressed.js"></script>
-    <script src="js/src/proj4leaflet.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
 
-        <!--Leaflet Time-Slider module js;
-        find maintained version at https://github.com/geyerbri/LeafletSlider-->
-        <script src="js/SliderControl.js"></script>
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
 
-        <style>
-            body {
-                margin: 0;
-                background-color: black;
-            }
-        	#myMap {
-                /*height: 100%;
-                width: 100%;*/
-        		width: 800px;
-                max-width: 100%;
-                height: 450px;
-                margin: 0;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                -ms-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%)
-        	}
-        </style>
 
-        <title>LeafletSlider Tutorial</title>
-    </head>
-    <body>
-        <!--Create the map div container-->
-        <div id="map">Test this text.</div>
-        <script>
-            
-                      // Generate the map and set its initial view
-        	    
-         var crs3057 = new L.Proj.CRS('EPSG:3057',
-    '+proj=lcc +lat_1=64.25 +lat_2=65.75 +lat_0=65 +lon_0=-19 +x_0=500000+y_0=500000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
-    {
-          transformation: L.Transformation(1, -7000000.0, -1, 11000000.0),
-          origin: [-7000000, 11000000],
-      		resolutions: [
-		        10583.354500042335,
-		        7937.5158750317505,
-		        3968.7579375158753,
-		        2645.8386250105837,
-		        1587.5031750063501,
-		        1058.3354500042335,
-		        529.1677250021168,
-		        264.5838625010584,
-		        132.2919312505292,
-		        66.1459656252646,
-		        26.458386250105836,
-		        13.229193125052918,
-		        6.614596562526459,
-		        2.6458386250105836,
-		        1.3229193125052918,]
-		    }
-      );
+  <title>CodePen - Leaflet map with Proj4Leaflet using IMO Basemap and toponyms</title>
+  
+  
+  <link rel='stylesheet' href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css'>
+  
+<style>
+body,
+html {
+  height: 99%;
+}
+  
+#map {
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+
+  <div id="map"></div>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+
+  <script src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js'></script>
+<script src='https://rawgit.com/kartena/Proj4Leaflet/master/lib/proj4-compressed.js'></script>
+<script src='https://kartena.github.io/Proj4Leaflet/src/proj4leaflet.js'></script>
+      <script id="rendered-js" >
+var crs3057 = new L.Proj.CRS('EPSG:3057',
+'+proj=lcc +lat_1=64.25 +lat_2=65.75 +lat_0=65 +lon_0=-19 +x_0=500000+y_0=500000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
+{
+  transformation: L.Transformation(1, -7000000.0, -1, 11000000.0),
+  origin: [-7000000, 11000000],
+  resolutions: [
+  10583.354500042335,
+  7937.5158750317505,
+  3968.7579375158753,
+  2645.8386250105837,
+  1587.5031750063501,
+  1058.3354500042335,
+  529.1677250021168,
+  264.5838625010584,
+  132.2919312505292,
+  66.1459656252646,
+  26.458386250105836,
+  13.229193125052918,
+  6.614596562526459,
+  2.6458386250105836,
+  1.3229193125052918] });
+
+
 
 map = new L.Map('map', {
-  crs: crs3057});
+  crs: crs3057 });
 
 var IMO_basemap = L.tileLayer('https://luk.vedur.is/arcgis/rest/services/grunnkort/grunnkort_cache_isn93/MapServer/tile/{z}/{y}/{x}', {
-		maxZoom: 15,
-		minZoom: 5,
-		attribution: 'Icelandic Met Office | National Land Survey of Iceland | © OpenStreetMap contributors',
-    tileSize: 512,
-    noWrap: true,
-    continuousWorld: true
-	}).addTo(map);
+  maxZoom: 15,
+  minZoom: 5,
+  attribution: 'Icelandic Met Office | National Land Survey of Iceland | © OpenStreetMap contributors',
+  tileSize: 512,
+  noWrap: true,
+  continuousWorld: true }).
+addTo(map);
 
-toponyms = new L.tileLayer('https://luk.vedur.is/arcgis/rest/services/ornefni/ornefni_cache_isn93/MapServer/tile/{z}/{y}/{x}',{
-		maxZoom: 13,
-		minZoom: 5,
-		tileSize: 512,
-		noWrap: true,
-		continuousWorld: true
-		}).addTo(map);
+toponyms = new L.tileLayer('https://luk.vedur.is/arcgis/rest/services/ornefni/ornefni_cache_isn93/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 13,
+  minZoom: 5,
+  tileSize: 512,
+  noWrap: true,
+  continuousWorld: true }).
+addTo(map);
 
 
 map.setView([64.9, -18.5], 6);
+//# sourceURL=pen.js
+    </script>
 
-            
-);
-            // Start with geoJSON data
-            
-            
+  
 
-        </script>
-    </body>
+</body>
+
 </html>
+ 
