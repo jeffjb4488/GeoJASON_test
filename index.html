@@ -51,32 +51,14 @@ html {
 <script src='https://kartena.github.io/Proj4Leaflet/src/proj4leaflet.js'></script>
   
       <script id="rendered-js" >
-var crs3057 = new L.Proj.CRS('EPSG:3057',
-'+proj=lcc +lat_1=64.25 +lat_2=65.75 +lat_0=65 +lon_0=-19 +x_0=500000+y_0=500000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
-{
-  transformation: L.Transformation(1, -7000000.0, -1, 11000000.0),
-  origin: [-7000000, 11000000],
-  resolutions: [
-  10583.354500042335,
-  7937.5158750317505,
-  3968.7579375158753,
-  2645.8386250105837,
-  1587.5031750063501,
-  1058.3354500042335,
-  529.1677250021168,
-  264.5838625010584,
-  132.2919312505292,
-  66.1459656252646,
-  26.458386250105836,
-  13.229193125052918,
-  6.614596562526459,
-  2.6458386250105836,
-  1.3229193125052918] });
+var crs26987 = new L.Proj.CRS('EPSG:26987',
+'+proj=lcc +lat_1=41.4833333333333 +lat_2=41.2833333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000+y_0=0 +ellps=GRS80 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
+);
 
 
 
 map = new L.Map('map', {
-  crs: crs3057 });
+  crs: crs26987 });
 
 var IMO_basemap = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
   maxZoom: 15,
@@ -96,7 +78,7 @@ toponyms = new L.tileLayer('https://luk.vedur.is/arcgis/rest/services/ornefni/or
 addTo(map);
 
 
-map.setView([64.9, -18.5], 6);
+map.setView([494575.4, 51195.9], 6);
 //# sourceURL=pen.js
     </script>
 
