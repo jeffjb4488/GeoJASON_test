@@ -1,0 +1,133 @@
+<html lang="en">
+    <head>
+        <!--jquery js-->
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+        <!--jQuery UI files-->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+        <!--jQuery UI Touch js, required for touchscreen use-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+        <!-- leaflet files -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
+        <!--Leaflet Time-Slider module js;
+        find maintained version at https://github.com/geyerbri/LeafletSlider-->
+        <script src="js/SliderControl.js"></script>
+
+        <style>
+            body {
+                margin: 0;
+                background-color: black;
+            }
+        	#myMap {
+                /*height: 100%;
+                width: 100%;*/
+        		width: 800px;
+                max-width: 100%;
+                height: 450px;
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%)
+        	}
+        </style>
+
+        <title>LeafletSlider Tutorial</title>
+    </head>
+    <body>
+        <!--Create the map div container-->
+        <div id="myMap">Test this text.</div>
+        <script>
+
+            // Start with geoJSON data
+            var dataset1 = [
+                {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [-119.0977191, 46.2465524]
+                    },
+                    properties: {
+                        title: 'Popup 1',
+                        description: 'Hello World!',
+                        time: '1992/01'
+                    }
+                },
+                {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [-119.201977, 46.257038]
+                    },
+                    properties: {
+                        title: 'Popup 2',
+                        description: 'Hello again, World!',
+                        time: '1992/07'
+                    }
+                },
+                {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [-119.1080419, 46.2309332]
+                    },
+                    properties: {
+                        title: 'Popup 3',
+                        description: 'Hello once again, World!',
+                        time: '1992/06'
+                    }
+                }
+            ];
+
+            // Generate the map and set its initial view
+        	var map1 = L.map('myMap').setView([46.26,-119.15], 12);
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }).addTo(map1);
+
+            // Write up the functions for using the geoJSON data to produce popups for each marker
+            var optionsObject = {
+                onEachFeature: onEachFeature
+            };
+            function onEachFeature (feature, layer) {
+                var content = "<div style='clear: both'></div><div><h4>" + feature.properties.title + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.description + "</p></div>";
+                layer.bindPopup(content, {closeButton: true});
+            };
+
+            // Create the first geoJSON layer
+            var group1 = L.geoJSON(dataset1, optionsObject);
+
+            // Create the second geoJSON layer from external file
+            $.getJSON("data/popups.json", function(json) {
+                var group2 = L.geoJSON(json, optionsObject);
+
+            // Set the time attribute for each group
+            group1.options.time = "1992";
+            group2.options.time = "1993";
+
+            // Create the layerGroup
+            var multiLayers = L.layerGroup([group1, group2]);
+
+            // Set the sliderControl options
+            var sliderControl1 = L.control.sliderControl( {
+                layer: multiLayers, //REQUIRED
+                alwaysShowDate: true,
+                showAllPopups: false, // to show all popups, instead of one, same as popup option "autoClose: false"
+                showPopups: false // to set it so, when a marker is generated by the slider, its popup doesn't automatically display
+            });
+
+            // Add the slider to the map
+            map1.addControl(sliderControl1);
+
+            // Initialize the slider
+            sliderControl1.startSlider();
+        });
+        </script>
+    </body>
+</html>
