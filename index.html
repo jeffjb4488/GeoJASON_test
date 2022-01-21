@@ -51,27 +51,31 @@ html {
 <script src='https://kartena.github.io/Proj4Leaflet/src/proj4leaflet.js'></script>
   
       <script id="rendered-js" >
-var crs26987 = new L.Proj.CRS('EPSG:26987',
-'+proj=lcc +lat_1=41.4833333333333 +lat_2=41.2833333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000+y_0=0 +ellps=GRS80 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
-{
-  transformation: L.Transformation(1, 0, -1, 0),
-  });
+var map1 = L.map('myMap').setView([41.461070584121636, -70.56516015402862], 12);
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }).addTo(map1);
+       
+proj4.defs("urn:ogc:def:crs:EPSG::26915", "+proj=utm +zone=15 +ellps=GRS80 +datum=NAD83 +units=m +no_defs");
 
+var geojson = {
+  type: "Feature",
+  geometry: {
+    type: "Point",
+    coordinates: [481650, 4980105]
+  },
+  crs: {
+    type: "name",
+    properties: {
+      name: "urn:ogc:def:crs:EPSG::26915"
+    }
+  }
+};
 
-map = new L.Map('map', {
-  crs: crs26987 });
+var map = L.map('map');
 
-var IMO_basemap = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-  maxZoom: 15,
-  minZoom: 5,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  tileSize: 512,
-  noWrap: true,
-  continuousWorld: true }).
-addTo(map);
+L.Proj.geoJson(geojson).addTo(map);
 
-map.setView([51195.9, 494575.4], 12);
-//# sourceURL=pen.js
     </script>
 
   
