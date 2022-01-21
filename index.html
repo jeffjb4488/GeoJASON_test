@@ -104,7 +104,7 @@
             var group1 = L.geoJSON(dataset1, optionsObject);
 
             // Create the second geoJSON layer from external file
-            $.getJSON("data/points_test.geojson", function(json) {
+            $.getJSON("data/popups.json", function(json) {
                 var group2 = L.geoJSON(json, optionsObject);
 
             // Set the time attribute for each group
