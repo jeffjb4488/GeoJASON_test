@@ -13,6 +13,9 @@
         <!-- leaflet files -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+        
+    <script src="js/lib/proj4-compressed.js"></script>
+    <script src="js/src/proj4leaflet.js"></script>
 
         <!--Leaflet Time-Slider module js;
         find maintained version at https://github.com/geyerbri/LeafletSlider-->
@@ -51,10 +54,10 @@
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-119.0977191, 46.2465524]
+                        coordinates: [-70.56309124057684, 41.458865506901574]
                     },
                     properties: {
-                        title: 'Popup 1',
+                        title: 'Washington Park',
                         description: 'Hello World!',
                         time: '1992/01'
                     }
@@ -63,10 +66,10 @@
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-119.201977, 46.257038]
+                        coordinates: [-70.56870102523344, 41.460456792954176]
                     },
                     properties: {
-                        title: 'Popup 2',
+                        title: 'Hospital',
                         description: 'Hello again, World!',
                         time: '1992/07'
                     }
@@ -75,10 +78,10 @@
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-119.1080419, 46.2309332]
+                        coordinates: [-70.56635974824825, 41.46146737530817]
                     },
                     properties: {
-                        title: 'Popup 3',
+                        title: 'SHearer Cottage',
                         description: 'Hello once again, World!',
                         time: '1992/06'
                     }
@@ -90,6 +93,8 @@
             L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map1);
+            
+            
 
             // Write up the functions for using the geoJSON data to produce popups for each marker
             var optionsObject = {
@@ -101,6 +106,7 @@
             };
 
             // Create the first geoJSON layer
+            proj4.defs('EPSG:26987', '+proj=lcc +lat_0=41 +lon_0=-70.5 +lat_1=41.4833333333333 +lat_2=41.2833333333333 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
             var group1 = L.geoJSON(dataset1, optionsObject);
 
             // Create the second geoJSON layer from external file
