@@ -55,7 +55,7 @@
                     },
                     properties: {
                         title: 'Dempster Park',
-                        description: 'Hello World!',
+                        descript: 'Hello World!',
                         time: '1992/01'
                     }
                 },
@@ -67,7 +67,7 @@
                     },
                     properties: {
                         title: 'Shearer Cottage',
-                        description: 'Hello again, World!',
+                        descript: 'Hello again, World!',
                         time: '1992/07'
                     }
                 },
@@ -79,7 +79,7 @@
                     },
                     properties: {
                         title: 'Washington Park',
-                        description: 'Hello once again, World!',
+                        descript: 'Hello once again, World!',
                         time: '1992/06'
                     }
                 }
@@ -96,7 +96,7 @@
                 onEachFeature: onEachFeature
             };
             function onEachFeature (feature, layer) {
-                var content = "<div style='clear: both'></div><div><h4>" + feature.properties.title + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.description + "</p></div>";
+                var content = "<div style='clear: both'></div><div><h4>" + feature.properties.title + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.descript + "</p></div>";
                 layer.bindPopup(content, {closeButton: true});
             };
 
@@ -104,8 +104,8 @@
             var group1 = L.geoJSON(dataset1, optionsObject);
 
             // Create the second geoJSON layer from external file
-            $.getJSON("data/1890_parcles_Test_export.geojson", function(geojson) {
-                var group2 = L.geoJSON(geojson, optionsObject);
+            $.getJSON("data/points_test.geojson", function(json) {
+                var group2 = L.geoJSON(json, optionsObject);
 
             // Set the time attribute for each group
             group1.options.time = "1992";
