@@ -3,8 +3,8 @@
 "name": "points_test",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::26987" } },
 "features": [
-{ "type": "Feature", "properties": { "id": 3, "title": "Chuancy Park", "time": "1993/03", "description": "words " }, "geometry": { "type": "Point", "coordinates": [ 41.462456873753766, -70.56101088940255 ] } },
-{ "type": "Feature", "properties": { "id": 1, "title": "Bpatist Temple Park", "time": "1993/01", "description": "words" }, "geometry": { "type": "Point", "coordinates": [ 41.46105612527624, -70.56496612003185 ] } },
-{ "type": "Feature", "properties": { "id": 2, "title": "Mill Square", "time": "1993/02", "description": "words" }, "geometry": { "type": "Point", "coordinates": [ 41.46312138207438, -70.56679700904898 ] } }
+{ "type": "Feature", "properties": { "id": 3, "title": "Chuancy Park", "time": "1993/03", "description": "words " }, "geometry": { "type": "Point", "coordinates": [ -70.56101088940255, 41.462456873753766 ] } },
+{ "type": "Feature", "properties": { "id": 1, "title": "Bpatist Temple Park", "time": "1993/01", "description": "words" }, "geometry": { "type": "Point", "coordinates": [ -70.56496612003185, 41.46105612527624 ] } },
+{ "type": "Feature", "properties": { "id": 2, "title": "Mill Square", "time": "1993/02", "description": "words" }, "geometry": { "type": "Point", "coordinates": [ -70.56679700904898, 41.46312138207438 ] } }
 ]
 }
