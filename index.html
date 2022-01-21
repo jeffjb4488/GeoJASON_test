@@ -51,11 +51,11 @@
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-70.5634919442989, 41.461855825564314]
+                        coordinates: [-119.0977191, 46.2465524]
                     },
                     properties: {
-                        title: 'Dempster Park',
-                        descript: 'Hello World!',
+                        title: 'Popup 1',
+                        description: 'Hello World!',
                         time: '1992/01'
                     }
                 },
@@ -63,11 +63,11 @@
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-70.56631128323484, 41.461459233506794]
+                        coordinates: [-119.201977, 46.257038]
                     },
                     properties: {
-                        title: 'Shearer Cottage',
-                        descript: 'Hello again, World!',
+                        title: 'Popup 2',
+                        description: 'Hello again, World!',
                         time: '1992/07'
                     }
                 },
@@ -75,18 +75,18 @@
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-70.56296705559068, 41.45896546613431]
+                        coordinates: [-119.1080419, 46.2309332]
                     },
                     properties: {
-                        title: 'Washington Park',
-                        descript: 'Hello once again, World!',
+                        title: 'Popup 3',
+                        description: 'Hello once again, World!',
                         time: '1992/06'
                     }
                 }
             ];
 
             // Generate the map and set its initial view
-        	var map1 = L.map('myMap').setView([41.46095948255622, -70.56500016985883], 14);
+        	var map1 = L.map('myMap').setView([46.26,-119.15], 12);
             L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map1);
@@ -96,7 +96,7 @@
                 onEachFeature: onEachFeature
             };
             function onEachFeature (feature, layer) {
-                var content = "<div style='clear: both'></div><div><h4>" + feature.properties.title + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.descriptions + "</p></div>";
+                var content = "<div style='clear: both'></div><div><h4>" + feature.properties.title + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.description + "</p></div>";
                 layer.bindPopup(content, {closeButton: true});
             };
 
@@ -131,3 +131,4 @@
         </script>
     </body>
 </html>
+
