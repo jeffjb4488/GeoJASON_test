@@ -70,13 +70,6 @@ var IMO_basemap = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}
   continuousWorld: true }).
 addTo(map);
 
-toponyms = new L.tileLayer('https://luk.vedur.is/arcgis/rest/services/ornefni/ornefni_cache_isn93/MapServer/tile/{z}/{y}/{x}', {
-  maxZoom: 13,
-  minZoom: 5,
-  }).
-addTo(map);
-
-
 map.setView([51195.9, 494575.4], 12);
 //# sourceURL=pen.js
     </script>
