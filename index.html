@@ -20,14 +20,13 @@
 <!--leaflet files-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
   
 <!--other files-->
 <script src='https://rawgit.com/kartena/Proj4Leaflet/master/lib/proj4-compressed.js'></script>
 <script src='https://kartena.github.io/Proj4Leaflet/src/proj4leaflet.js'></script>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
-<link rel="stylesheet" href="css/leaflet.awesome-markers.css">
-<script src="js/leaflet.awesome-markers.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   
 <style>
@@ -72,17 +71,18 @@ proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +l
 
 $.getJSON("data/points_test.geojson")
     .then(function (data) {
-        var timesIcon = L.divicon({
-            html: '<i class="fas fa-times"></i>',
+        var ratIcon = L.icon({
+            iconUrl: 'icons/times-solid.png',
             iconSize: [60, 50]
         });
         L.Proj.geoJson(data, {
             pointToLayer: function (feature, latlng) {
-                var marker = L.marker(latlng, { icon: timesIcon });
+                var marker = L.marker(latlng, { icon: ratIcon });
                 marker.bindPopup(feature.properties.Location + '<br/>' + feature.properties.OPEN_DT);
                 return marker;
             }
         }).addTo(map);
+
 
     })
     .fail(function(err){
