@@ -78,28 +78,23 @@ var geojson1 = {
     }
   };
         
-var optionsObject = {
-                onEachFeature: onEachFeature
-            };
-            function onEachFeature (feature, layer) {
-                var content = "<div style='clear: both'></div><div><h4>" + feature.properties.name + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.descript + "</p></div>";
-                layer.bindPopup(content, {closeButton: true});
-            };
+L.Proj.geoJson(geojson1, {
+  'pointToLayer': function(feature, latlng) {
+    return L.marker(latlng).bindPopup(feature.properties.name);
+  }
+}).addTo(map);
 
-        
- var group1 = L.Proj.geoJSON(geojson1, optionsObject);
+    
         
  
 $.getJSON("data/points_test.geojson", function(json) {
-                var group2 = L.Proj.geoJSON(json, optionsObject);
+                var geojson2 = L.Proj.geoJSON(json, {
   
-  // Set the time attribute for each group
-            group1.options.time = "1992";
-            group2.options.time = "1993";
+  onEachFeature: function(feature, featureLayer) {
+featureLayer.bindPopup(feature.properties.name);
+}.addTo(map);
+  
 
-            // Create the layerGroup
-            var multiLayers = L.layerGroup([group1, group2]);
-  
              
   });
         
