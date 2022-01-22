@@ -80,11 +80,15 @@ var geojson = {
     }
   };
 
-L.Proj.geoJson(geojson, {
-  'pointToLayer': function(feature, latlng) {
-    return L.marker(latlng).bindPopup(feature.properties.name);
-  }
+
+$.getJSON("points_test.geojson",function(data){
+// add GeoJSON layer to the map once the file is loaded
+var datalayer = L.geoJson(data ,{
+onEachFeature: function(feature, featureLayer) {
+featureLayer.bindPopup(feature.properties.name);
+}
 }).addTo(map);
+  });
 
     </script>
 
