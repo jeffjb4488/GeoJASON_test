@@ -59,7 +59,7 @@ var map = L.map('map').setView([41.461070584121636, -70.56516015402862], 12);
        
 proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
-var dataset1 = {
+var geojson1 = {
   type: 'Feature',
   geometry: {
     type: 'Point',
@@ -87,7 +87,7 @@ var optionsObject = {
             };
 
         
- var group1 = L.Proj.geoJSON(dataset1, optionsObject);
+ var group1 = L.Proj.geoJSON(geojson1, optionsObject);
         
  
 $.getJSON("data/points_test.geojson", function(json) {
