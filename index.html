@@ -76,8 +76,6 @@ var geojson = {
   }
 };
 
-var map = L.map('map');
-
 L.Proj.geoJson(geojson, {
   'pointToLayer': function(feature, latlng) {
     return L.marker(latlng).bindPopup(feature.properties.name);
