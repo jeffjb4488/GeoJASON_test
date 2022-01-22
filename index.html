@@ -83,7 +83,7 @@ var geojson = {
 
 $.getJSON("points_test.geojson",function(data){
 // add GeoJSON layer to the map once the file is loaded
-var datalayer = L.geoJson(data ,{
+var datalayer = L.Proj.geoJson(data ,{
 onEachFeature: function(feature, featureLayer) {
 featureLayer.bindPopup(feature.properties.name);
 }
