@@ -73,7 +73,7 @@ function getmyjson(data) {
 }
 
 var geojsonLayer = new L.GeoJSON.AJAX(["/data/points_test.geojson"], {
-    dataType:"jsonp",
+    dataType:"json",
     callbackParam:"getmyjson",
     pointToLayer: function (data) {
           data.crs={
