@@ -73,8 +73,7 @@ function popUp(f,l){
         l.bindPopup(out.join("<br />"));
     }
 }
-        
-var jsonTest = new L.Proj.GeoJSON.AJAX(["data/points_test.geojson"],{onEachFeature:popUp}).addTo(map);
+var jsonTest = new L.GeoJSON.AJAX([".../data/colleges.geojson","counties.geojson"],{onEachFeature:popUp}).addTo(map);
         
  
  
