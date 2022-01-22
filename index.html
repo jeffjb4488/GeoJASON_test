@@ -65,26 +65,25 @@ var map = L.map('map').setView([41.461070584121636, -70.56516015402862], 12);
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map);
        
-proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
-
-function getmyjson(data) {
-   geojsonLayer.addData(data);
-   geojsonLayer.addTo(map);
-}
-
-var geojsonLayer = new L.GeoJSON.AJAX(["/data/points_test.geojson"], {
-    dataType:"json",
-    callbackParam:"getmyjson",
-    pointToLayer: function (data) {
-          data.crs={
-            type: "name",
-            properties: {name: "urn:ogc:def:crs:EPSG::26987"}
-      };
-    return L.Proj.geoJson(data)
-        }
-});
-   
-        
+$.getJSON("data/colleges.geojson")
+    .then(function (data) {
+        var ratIcon = L.icon({
+            iconUrl: 'http://maptimeboston.github.io/leaflet-intro/rat.png',
+            iconSize: [60, 50]
+        });
+        L.geoJson(data, {
+            pointToLayer: function (feature, latlng) {
+                var marker = L.marker(latlng, { icon: ratIcon });
+                marker.bindPopup(feature.properties.Location + '<br/>' + feature.properties.OPEN_DT);
+                return marker;
+            }
+        }).addTo(map);
+    })
+    .fail(function(err){
+        console.log(err.responseText)
+    });
+      
+ 
 
         
  
