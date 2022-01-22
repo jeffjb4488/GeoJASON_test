@@ -85,17 +85,7 @@ L.Proj.geoJson(geojson1, {
 }).addTo(map);
 
     
-        
- 
-$.getJSON("data/points_test.geojson", function(json) {
-                var geojson2 = L.Proj.geoJSON(json, {
-  
-  onEachFeature: function(feature, featureLayer) {
-featureLayer.bindPopup(feature.properties.name);
-}.addTo(map);
-  
 
-             
   });
         
     </script>
