@@ -72,18 +72,18 @@ proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +l
 
 $.getJSON("data/points_test.geojson")
     .then(function (data) {
-        var timesIcon = L.AwesomeMarkers.icon({
-            icon: 'times',
-            iconSize: [60, 50],
-            markerColor: 'red'
+        var ratIcon = L.icon({
+            iconUrl: 'http://maptimeboston.github.io/leaflet-intro/rat.png',
+            iconSize: [60, 50]
         });
         L.Proj.geoJson(data, {
             pointToLayer: function (feature, latlng) {
-                var marker = L.marker(latlng, { icon: timesIcon });
+                var marker = L.marker(latlng, { icon: ratIcon });
                 marker.bindPopup(feature.properties.Location + '<br/>' + feature.properties.OPEN_DT);
                 return marker;
             }
         }).addTo(map);
+
     })
     .fail(function(err){
         console.log(err.responseText)
