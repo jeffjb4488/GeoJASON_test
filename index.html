@@ -70,12 +70,12 @@ var map = L.map('map').setView([41.461070584121636, -70.56516015402862], 14);
 proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
 $.getJSON("data/points_test.geojson")
-    .then(function (data) {
+    .then(function (geojson1) {
         var ratIcon = L.icon({
             iconUrl: 'icons/times-solid.png',
             iconSize: [60, 50]
         });
-        L.Proj.geoJson(data, {
+        L.Proj.geoJson(geojson1, {
             pointToLayer: function (feature, latlng) {
                 var marker = L.marker(latlng, { icon: ratIcon });
                 marker.bindPopup(feature.properties.title + '<br/>' + feature.properties.time + '<br/>' + feature.properties.descript);
@@ -86,7 +86,29 @@ $.getJSON("data/points_test.geojson")
 
     })
     .fail(function(err){
-        console.log(err.responseText)
+        console.log(err.responseText);
+  
+  function style(feature) {
+    return {
+        fillColor: '#E31A1C',
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+$.getJSON("data/polygon_test.geojson")
+    .then(function (geojson2)  
+  
+L.Proj.geoJson(geojson2, {
+            style: style,
+            onEachFeature: function (feature, layer) {
+            layer.bindTooltip(feature.properties.title.toString(), { permanent: true });
+        }}).addTo(map);
+  
+  
     });
       
  
