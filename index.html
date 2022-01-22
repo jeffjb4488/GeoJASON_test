@@ -67,16 +67,25 @@ var map = L.map('map').setView([41.461070584121636, -70.56516015402862], 12);
        
 proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
-function popUp(f,l){
-    var out = [];
-    if (f.properties){
-        for(key in f.properties){
-            out.push(key+": "+f.properties[key]);
-        }
-        l.bindPopup(out.join("<br />"));
-    }
+function getmyjson(data) {
+   geojsonLayer.addData(data);
+   geojsonLayer.addTo(map);
 }
-var jsonTest = new L.GeoJSON.AJAX([".../data/colleges.geojson",".../data/counties.geojson"],{onEachFeature:popUp}).addTo(map);
+
+var geojsonLayer = new L.GeoJSON.AJAX(["/data/points_test.geojson"], {
+    dataType:"jsonp",
+    callbackParam:"getmyjson",
+    pointToLayer: function (data) {
+          data.crs={
+            "type": "name",
+            "properties": {"name": "urn:ogc:def:crs:EPSG::26987"}
+      };
+    return L.Proj.geoJson(data)
+        }
+});
+   
+        
+
         
  
  
