@@ -77,8 +77,8 @@ var geojsonLayer = new L.GeoJSON.AJAX(["/data/points_test.geojson"], {
     callbackParam:"getmyjson",
     pointToLayer: function (data) {
           data.crs={
-            "type": "name",
-            "properties": {"name": "urn:ogc:def:crs:EPSG::26987"}
+            type: "name",
+            properties: {name: "urn:ogc:def:crs:EPSG::26987"}
       };
     return L.Proj.geoJson(data)
         }
