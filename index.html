@@ -24,7 +24,10 @@
 <!--other files-->
 <script src='https://rawgit.com/kartena/Proj4Leaflet/master/lib/proj4-compressed.js'></script>
 <script src='https://kartena.github.io/Proj4Leaflet/src/proj4leaflet.js'></script>
-
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+<link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+<script src="js/leaflet.awesome-markers.js"></script>
 
   
 <style>
@@ -69,13 +72,14 @@ proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +l
 
 $.getJSON("data/points_test.geojson")
     .then(function (data) {
-        var ratIcon = L.icon({
-            iconUrl: 'http://maptimeboston.github.io/leaflet-intro/rat.png',
-            iconSize: [60, 50]
+        var timesIcon = L.AwesomeMarkers.icon({
+            icon: 'times',
+            iconSize: [60, 50],
+            markerColor: 'red'
         });
         L.Proj.geoJson(data, {
             pointToLayer: function (feature, latlng) {
-                var marker = L.marker(latlng, { icon: ratIcon });
+                var marker = L.marker(latlng, { icon: timesIcon });
                 marker.bindPopup(feature.properties.Location + '<br/>' + feature.properties.OPEN_DT);
                 return marker;
             }
