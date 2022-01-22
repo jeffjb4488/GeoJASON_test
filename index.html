@@ -78,7 +78,7 @@ $.getJSON("data/points_test.geojson")
         L.Proj.geoJson(data, {
             pointToLayer: function (feature, latlng) {
                 var marker = L.marker(latlng, { icon: ratIcon });
-                marker.bindPopup(feature.properties.title + '<br/>' + feature.properties.title + '<br/>' + feature.properties.descript);
+                marker.bindPopup(feature.properties.title + '<br/>' + feature.properties.time + '<br/>' + feature.properties.descript);
                 return marker;
             }
         }).addTo(map);
