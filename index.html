@@ -80,6 +80,8 @@ L.Proj.geoJson(geojson, {
     return L.marker(latlng).bindPopup(feature.properties.name);
   }
 }).addTo(map);
+        
+ L.geoJSON(points_test.geojson).addTo(map);
 
     </script>
 
