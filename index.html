@@ -83,7 +83,7 @@ var optionsObject = {
             };
             function onEachFeature (feature, layer) {
                 var content = "<div style='clear: both'></div><div><h4>" + feature.properties.name + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.descript + "</p></div>";
-                L.marker(latlng).bindPopup(content, {closeButton: true});
+                layer.bindPopup(content, {closeButton: true});
             };
 
         
@@ -92,6 +92,13 @@ var optionsObject = {
  
 $.getJSON("data/points_test.geojson", function(json) {
                 var group2 = L.Proj.geoJSON(json, optionsObject);
+  
+  // Set the time attribute for each group
+            group1.options.time = "1992";
+            group2.options.time = "1993";
+
+            // Create the layerGroup
+            var multiLayers = L.layerGroup([group1, group2]);
   
              
   });
