@@ -73,7 +73,7 @@ proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +l
 $.getJSON("data/points_test.geojson")
     .then(function (data) {
         var ratIcon = L.icon({
-            iconUrl: 'http://maptimeboston.github.io/leaflet-intro/rat.png',
+            iconUrl: '/icons/times-solid.svg',
             iconSize: [60, 50]
         });
         L.Proj.geoJson(data, {
