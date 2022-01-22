@@ -81,8 +81,15 @@ L.Proj.geoJson(geojson, {
   }
 }).addTo(map);
         
- L.geoJSON(points_test.geojson).addTo(map);
-
+ 
+L.geoJSON(points_test.geojson, {
+    style: function (feature, latlng) {
+        return L.marker(latlng);
+    }
+}).bindPopup(function (layer) {
+    return layer.feature.properties.descript;
+}).addTo(map);
+        
     </script>
 
   
