@@ -62,19 +62,18 @@ var geojson = {
   'type': 'Feature',
   'geometry': {
     'type': 'Point',
-    'coordinates': [51197.3, 494593.5],
+    'coordinates': [481650, 4980105],
   },
-    'properties':{
+  'properties': {
     'name': 'University of Minnesota'
   },
-
   'crs': {
-    'type': "name",
+    'type': 'name',
     'properties': {
-      'name': "urn:ogc:def:crs:EPSG::26987"
+        'name': 'urn:ogc:def:crs:EPSG::26915'
+      }
     }
-  }
-};
+  };
 
 L.Proj.geoJson(geojson, {
   'pointToLayer': function(feature, latlng) {
