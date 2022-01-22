@@ -13,7 +13,6 @@
   
   
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
-<script src="js/SliderControl.js"></script>
 
   
 <style>
@@ -63,29 +62,25 @@ var geojson = {
   type: 'Feature',
   geometry: {
     type: 'Point',
-    coordinates: [51197.3, 494593.5],
+    coordinates: [494593.5, 51197.3],
   },
-    properties:{
+  properties: {
     name: 'University of Minnesota'
   },
-
   crs: {
-    type: "name",
+    type: 'name',
     properties: {
-      name: "urn:ogc:def:crs:EPSG::26987"
+        name: 'urn:ogc:def:crs:EPSG::26987'
+      }
     }
-  }
-};
+  };
 
-        
 L.Proj.geoJson(geojson, {
   'pointToLayer': function(feature, latlng) {
     return L.marker(latlng).bindPopup(feature.properties.name);
   }
 }).addTo(map);
 
-  });
-        
     </script>
 
   
@@ -93,4 +88,3 @@ L.Proj.geoJson(geojson, {
 </body>
 
 </html>
- 
