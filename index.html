@@ -147,6 +147,9 @@ var geojson;
 	}
 
 	function onEachFeature(feature, layer) {
+		if (feature.properties && feature.properties.popupContent) {
+        layer.bindPopup(feature.properties.popupContent);
+		},
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
