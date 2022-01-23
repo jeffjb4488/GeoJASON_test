@@ -100,7 +100,7 @@ return this._div;
 };
 
 info.update = function (props) {
-this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+this._div.innerHTML = '<h4>US Population Density</h4>' +  (props.feature2 ?
 	'<b>' + props.feature2.title + '</b><br />' + props.feature2.time + ' people / mi<sup>2</sup>' : 'Hover over a state');
 };
 
