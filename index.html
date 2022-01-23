@@ -122,6 +122,7 @@ info.addTo(map);
 	}
   
 	function highlightFeature(e) {
+	geojson2.resetStyle();
 		var layer = e.target;
 		    
     layer.setStyle({
@@ -148,6 +149,22 @@ info.addTo(map);
 	function zoomToFeature(e) {
 		map.fitBounds(e.target.getBounds());
 	}
+	
+	function style(feature) {
+    return {
+        fillColor: '#004691', 
+        fillOpacity: 0.5,  
+        weight: 1,
+        opacity: 1,
+        color: '#424a44',
+        dashArray: '1'
+    };
+}
+	var highlight = {
+		'fillColor': 'yellow',
+		'weight': 1,
+		'opacity': 1
+	};
 
 	function onEachFeature(feature, layer) {
 		layer.on({
