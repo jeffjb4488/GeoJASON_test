@@ -85,6 +85,19 @@ $.getJSON("data/points_test.geojson")
             }
         }).addTo(map);
   
+  var fillColor = "red"
+
+$.getJSON("data/polygon_test.geojson",function(geojson2){
+// add GeoJSON layer to the map once the file is loaded
+            var datalayer = L.Proj.geoJson(geojson2 ,{
+                     onEachFeature: function(feature, featureLayer) {
+                     featureLayer.bindPopup(feature.properties.title); { color: feature.properties.fillColor };
+                     }
+                     }).addTo(map);
+                     map.fitBounds(datalayer.getBounds());
+                     });
+
+  
 })
 
  
