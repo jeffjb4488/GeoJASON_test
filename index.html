@@ -85,17 +85,30 @@ $.getJSON("data/points_test.geojson")
             }
         }).addTo(map);
   
-  var fillColor = "red"
+  function style1(feature2) {
+    return {
+        fillColor: "red",
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
 
 $.getJSON("data/polygon_test.geojson",function(geojson2){
 // add GeoJSON layer to the map once the file is loaded
     var datalayer = L.Proj.geoJson(geojson2 ,{
-             onEachFeature: function(feature, featureLayer) {
-             featureLayer.bindPopup(feature.properties.title); { color: feature.properties.fillColor };
+             onEachFeature: function(feature2, featureLayer) {
+             featureLayer.bindPopup(feature2.properties.title + '<br/>' + feature2.properties.time + '<br/>' + feature2.properties.descript); { style1: feature2.properties.fillColor };
              }
              }).addTo(map);
              map.fitBounds(datalayer.getBounds());
              });
+  
+
+
+  
 })
   
  
