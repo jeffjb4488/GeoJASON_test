@@ -147,15 +147,15 @@ var geojson;
 	}
 
 	function onEachFeature(feature, layer) {
-		if (feature.properties && feature.properties.popupContent) {
-        layer.bindPopup(feature.properties.popupContent);
-		},
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
 			click: zoomToFeature
 		});
-	}
+		   if (feature.properties && feature.properties.popupContent) {
+        layer.bindPopup(feature.properties.popupContent);
+    }
+};
 
 $.getJSON("data/polygon_test.geojson",function(geojson2){
 // add GeoJSON layer to the map once the file is loaded
