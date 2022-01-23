@@ -84,44 +84,8 @@ $.getJSON("data/points_test.geojson")
                 return marker;
             }
         }).addTo(map);
-
-
-function style(feature2) {
-    return {
-        fillColor: 'green', 
-        fillOpacity: 0.5,  
-        weight: 2,
-        opacity: 1,
-        color: '#ffffff',
-        dashArray: '3'
-    };
-}
-    var highlight = {
-        'fillColor': 'yellow',
-        'weight': 2,
-        'opacity': 1
-    }
-
-        function forEachFeature(feature2, layer) {
-               var popupContent = "<p><b>title: </b>"+ feature2.properties.title +
-                "</br>time: "+ feature2.properties.time +
-                "</br>descript: "+ feature2.properties.discript +"</p>";
-
-
-            layer.bindPopup(popupContent)
-
-            layer.on("click", function (e) { 
-                polyLayer.setStyle(style); //resets layer colors
-                layer.setStyle(highlight);  //highlights selected.
-            })
-
-var = polyLayer = L.Proj.geoJson(null, {onEachFeature: forEachFeature, style: style});
-        
-$.getJSON("data/polygon_test.geojson", function(geojson2) {
-    polyLayer.addData(geojson2);
-});
-
-polyLayer.addTo(map);
+  
+})
 
  
 </script>
