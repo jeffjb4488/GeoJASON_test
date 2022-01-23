@@ -71,6 +71,8 @@ var map = L.map('map').setView([41.461070584121636, -70.56516015402862], 14);
 
 proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
+   
+
 $.getJSON("data/points_test.geojson")
     .then(function (geojson1) {
         var timesIcon = L.icon({
@@ -85,22 +87,77 @@ $.getJSON("data/points_test.geojson")
             }
         }).addTo(map);
   
-  function style1(feature2) {
-    return {
-        fillColor: "red",
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
-    };
-}
+  
+  var info = L.control();
+        
+        
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
+        
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+			'<b>' + props.title + '</b><br />' + props.time + ' people / mi<sup>2</sup>' : 'Hover over a state');
+	};
+
+	info.addTo(map);     
+  
+  
+	function style(feature) {
+		return {
+			weight: 2,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7,
+			fillColor: 'red'
+		};
+	}
+  
+	function highlightFeature(e) {
+		var layer = e.target;
+    
+    layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+
+		info.update(layer.feature.properties);
+	}
+  
+var geojson2;
+  
+  function resetHighlight(e) {
+		geojson2.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
 
 $.getJSON("data/polygon_test.geojson",function(geojson2){
 // add GeoJSON layer to the map once the file is loaded
     var datalayer = L.Proj.geoJson(geojson2 ,{
+             style: 
              onEachFeature: function(feature2, featureLayer) {
-             featureLayer.bindPopup(feature2.properties.title + '<br/>' + feature2.properties.time + '<br/>' + feature2.properties.descript); { style1: feature2 };
+             featureLayer.bindPopup(feature2.properties.title + '<br/>' + feature2.properties.time + '<br/>' + feature2.properties.descript); { style: style }; 
              }
              }).addTo(map);
              map.fitBounds(datalayer.getBounds());
