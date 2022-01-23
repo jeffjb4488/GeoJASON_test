@@ -66,9 +66,11 @@ html {
       <script id="rendered-js" >
 var map = L.map('map').setView([41.461070584121636, -70.56516015402862], 14);
             L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+		maxZoom: 20,
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map);
-
+	      
+	      
 proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
    
@@ -89,23 +91,23 @@ $.getJSON("data/points_test.geojson")
   
   
   var info = L.control();
-        
-        
-	info.onAdd = function (map) {
-		this._div = L.DomUtil.create('div', 'info');
-		this.update();
-		return this._div;
-	};
-        
-	info.update = function (props) {
-		this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-			'<b>' + props.title + '</b><br />' + props.time + ' people / mi<sup>2</sup>' : 'Hover over a state');
-	};
 
-	info.addTo(map);     
+
+info.onAdd = function (map) {
+this._div = L.DomUtil.create('div', 'info');
+this.update();
+return this._div;
+};
+
+info.update = function (props) {
+this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+	'<b>' + props.title + '</b><br />' + props.time + ' people / mi<sup>2</sup>' : 'Hover over a state');
+};
+
+info.addTo(map);  
   
   
-	function style(feature) {
+	function style(feature2) {
 		return {
 			weight: 2,
 			opacity: 1,
@@ -130,7 +132,7 @@ $.getJSON("data/points_test.geojson")
 			layer.bringToFront();
 		}
 
-		info.update(layer.feature.properties);
+		info.update(layer.feature2.properties);
 	}
   
 var geojson2;
@@ -144,7 +146,7 @@ var geojson2;
 		map.fitBounds(e.target.getBounds());
 	}
 
-	function onEachFeature(feature, layer) {
+	function onEachFeature(feature2, layer) {
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
@@ -154,11 +156,11 @@ var geojson2;
 
 $.getJSON("data/polygon_test.geojson",function(geojson2){
 // add GeoJSON layer to the map once the file is loaded
-    var layer = L.Proj.geoJson(geojson2 ,{
+    var datalayer = L.Proj.geoJson(geojson2 ,{
 	     style:style,
              onEachFeature: onEachFeature
              }).addTo(map);
-	     map.fitBounds(layer.getBounds());
+	     map.fitBounds(datalayer.getBounds());
   		});
 
 
