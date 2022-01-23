@@ -100,14 +100,14 @@ return this._div;
 };
 
 info.update = function (props) {
-this._div.innerHTML = '<h4>US Population Density</h4>' +  (props.feature2 ?
-	'<b>' + props.feature2.title + '</b><br />' + props.feature2.time + ' people / mi<sup>2</sup>' : 'Hover over a state');
+this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+	'<b>' + props.title + '</b><br />' + props.time + ' people / mi<sup>2</sup>' : 'Hover over a state');
 };
 
 info.addTo(map);  
   
   
-	function style(feature2) {
+	function style(feature) {
 		return {
 			weight: 2,
 			opacity: 1,
@@ -132,21 +132,21 @@ info.addTo(map);
 			layer.bringToFront();
 		}
 
-		info.update(layer.feature2.properties);
+		info.update(layer.feature.properties);
 	}
   
 var geojson2;
   
 	function resetHighlight(e) {
 		geojson2.resetStyle(e.target);
-		info.update();
+		info.update(layer);
 	}
 
 	function zoomToFeature(e) {
 		map.fitBounds(e.target.getBounds());
 	}
 
-	function onEachFeature(feature2, layer) {
+	function onEachFeature(feature, layer) {
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
