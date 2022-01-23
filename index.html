@@ -135,9 +135,9 @@ $.getJSON("data/points_test.geojson")
   
 var geojson2;
   
-  function resetHighlight(e) {
+	function resetHighlight(e) {
 		geojson2.resetStyle(e.target);
-	  	 info.update();
+		info.update();
 	}
 
 	function zoomToFeature(e) {
@@ -154,11 +154,11 @@ var geojson2;
 
 $.getJSON("data/polygon_test.geojson",function(geojson2){
 // add GeoJSON layer to the map once the file is loaded
-    var datalayer = L.Proj.geoJson(geojson2 ,{
+    var layer = L.Proj.geoJson(geojson2 ,{
 	     style:style,
              onEachFeature: onEachFeature
              }).addTo(map);
-	     map.fitBounds(datalayer.getBounds());
+	     map.fitBounds(layer.getBounds());
   		});
 
 
