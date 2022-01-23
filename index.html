@@ -92,17 +92,20 @@ $.getJSON("data/points_test.geojson")
   
   var info = L.control();
 var geojson2;
-
-info.update = function (props) {
-this._div.innerHTML = geojson2 +  (props ?
-	'<b>' + props.title + '</b><br />' + props.time + ' date ' : 'Hover over a lot');
-};
-
+	
 info.onAdd = function (map) {
 	this._div = L.DomUtil.create('div', 'info');
 	this.update();
 	return this._div;
 	};
+
+//will pull up anything put in props//
+
+info.update = function (props) {
+this._div.innerHTML = '<h4>Lot Information</h4>' +  (props ?
+	'<b>' + props.title + '</b><br />' + props.time + ' date ' + '</b><br />' + props.discript + '</b><br />' : 'Hover over a lot');
+};
+
 
 info.addTo(map);  
   
