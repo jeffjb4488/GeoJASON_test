@@ -105,7 +105,7 @@ $.getJSON("data/points_test.geojson")
 	info.addTo(map);     
   
   
-	function style(feature) {
+	function style(feature2) {
 		return {
 			weight: 2,
 			opacity: 1,
@@ -130,7 +130,7 @@ $.getJSON("data/points_test.geojson")
 			layer.bringToFront();
 		}
 
-		info.update(layer.feature.properties);
+		info.update(layer.feature2.properties);
 	}
   
 var geojson2;
@@ -160,11 +160,10 @@ $.getJSON("data/polygon_test.geojson",function(geojson2){
              featureLayer.bindPopup(feature2.properties.title + '<br/>' + feature2.properties.time + '<br/>' + feature2.properties.descript); 
              }
              }).addTo(map);
-             });
-  
+	     map.fitBounds(datalayer.getBounds());
+	     });
 
 
-  
 })
   
  
