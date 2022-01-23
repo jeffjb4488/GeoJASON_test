@@ -97,9 +97,9 @@ $.getJSON("data/points_test.geojson")
 		return this._div;
 	};
         
-	info.update = function (feature2) {
-		this._div.innerHTML = '<h4>US Population Density</h4>' +  (feature2 ?
-			'<b>' + feature2.title + '</b><br />' + feature2.time + ' people / mi<sup>2</sup>' : 'Hover over a state');
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+			'<b>' + props.title + '</b><br />' + props.time + ' people / mi<sup>2</sup>' : 'Hover over a state');
 	};
 
 	info.addTo(map);     
@@ -112,7 +112,7 @@ $.getJSON("data/points_test.geojson")
 			color: 'white',
 			dashArray: '3',
 			fillOpacity: 0.7,
-			fillColor: 'red'
+			fillColor: 'green'
 		};
 	}
   
