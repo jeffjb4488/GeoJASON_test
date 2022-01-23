@@ -158,7 +158,8 @@ $.getJSON("data/polygon_test.geojson",function(geojson2){
 	     style:style,
              onEachFeature: onEachFeature
              }).addTo(map);
-	    });
+	     map.fitBounds(datalayer.getBounds());
+  		});
 
 
 })
