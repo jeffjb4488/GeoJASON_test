@@ -29,9 +29,8 @@
 <script src='https://kartena.github.io/Proj4Leaflet/src/proj4leaflet.js'></script>
 <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
-<script src="https://unpkg.com/georaster"></script>
-<script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
+<script src="https://unpkg.com/leaflet.tilelayer.mbtiles@latest/Leaflet.TileLayer.MBTiles.js"></script>
+<script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
 
   
 <style>
@@ -72,29 +71,7 @@ var map = L.map('map').setView([41.461070584121636, -70.56516015402862], 14);
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map);
             
-var url_to_geotiff_file = "https://storage.googleapis.com/pdd-stac/disasters/hurricane-harvey/0831/20170831_172754_101c_3b_Visual.tif";
 
-      parseGeoraster(url_to_geotiff_file).then(georaster => {
-        console.log("georaster:", georaster);
-
-        /*
-            GeoRasterLayer is an extension of GridLayer,
-            which means can use GridLayer options like opacity.
-
-            Just make sure to include the georaster option!
-
-            http://leafletjs.com/reference-1.2.0.html#gridlayer
-        */
-        var layer = new GeoRasterLayer({
-            attribution: "Planet",
-            georaster: georaster,
-            resolution: 128
-        });
-        layer.addTo(map);
-
-        map.fitBounds(layer.getBounds());
-
-    });
 
 proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
