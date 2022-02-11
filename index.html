@@ -65,24 +65,22 @@ html {
 
 
       <script id="rendered-js" >
-var map = L.map('map').setView([41.461070584121636, -70.56516015402862], 14);
-            L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-		maxZoom: 20,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            }).addTo(map);
+var url_tile = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
+var overlay_tile = 'https://api.maptiler.com/tiles/4b10b258-3f3b-4822-a36e-89328f00bf23/{z}/{x}/{y}.png?key=kUPH9bhggOn8sGeOtVCW';
+
+var map = L.map('map', {editable: true}).setView([41.461070584121636, -70.56516015402862], 14);
+
+var tilelayer = L.tileLayer(url_tile, {
+  noWrap: true,
+  maxZoom: 20,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var overlaylayer = L.tileLayer(overlay_tile, {
+  noWrap: true,
+  opacity: 0.6
+}).addTo(map);
             
-var mb = L.tileLayer.mbTiles('.maps/Plan_Map_of_the_Highlands_1890_best_imagery_4326.mbtiles', {
-		minZoom: 12,
-		maxZoom: 18
-	}).addTo(map);
-
-	mb.on('databaseloaded', function(ev) {
-		console.info('MBTiles DB loaded', ev);
-	});
-	mb.on('databaseerror', function(ev) {
-		console.info('MBTiles DB error', ev);
-	});
-
 proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
 
@@ -183,6 +181,7 @@ $.getJSON("data/polygon_test.geojson",function(geojson2){
   		});
 
 
+
 });
 
 
@@ -197,4 +196,3 @@ $.getJSON("data/polygon_test.geojson",function(geojson2){
 </body>
 
 </html>
-
