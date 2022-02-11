@@ -66,24 +66,20 @@ html {
 
       <script id="rendered-js" >
 var url_tile = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
-var overlay_tile = 'https://api.mapbox.com/styles/v/mapbox/{jeffjb4488.cfsj2bzv}/tiles/{z}/{x}/{y}?access_token={pk.eyJ1IjoiamVmZmpiNDQ4OCIsImEiOiJja2F3aXdiZzQwOHprMnlteHh3aDkwcmZqIn0.P1FlhRaLd6rjqL96TQFcaQ}';
+var overlay_tile = 'https://map-tile.server.burne138.msu.domains/Plan_Map_of_the_Highlands_1890_best_imagery_4326_mostzoom/{z}/{x}/{y}.png';
 
 
 var map = L.map('map', {editable: true}).setView([41.461070584121636, -70.56516015402862], 14);
 
 var tilelayer = L.tileLayer(url_tile, {
   noWrap: true,
-  maxZoom: 20,
+  maxZoom: 18,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-var overlaylayer = L.tileLayer('https://api.mapbox.com/v4/{tilesetId}/{z}/{x}/{y}.png?access_token={accessToken}', {
-  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-  maxZoom: 18,
-  accessToken: 'pk.eyJ1IjoiamVmZmpiNDQ4OCIsImEiOiJja2F3aXdiZzQwOHprMnlteHh3aDkwcmZqIn0.P1FlhRaLd6rjqL96TQFcaQ',
-  tilesetId: 'jeffjb4488.cfsj2bzv',
+var overlaylayer = L.tileLayer(overlay_tile, {
   noWrap: true,
-  opacity: 0.6,
+  opacity: 0.6
 }).addTo(map);
 
 proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
@@ -182,17 +178,16 @@ $.getJSON("data/polygon_test.geojson",function(geojson2){
     var datalayer = L.Proj.geoJson(geojson2 ,{
 	     style:style,
              onEachFeature: onEachFeature
-             }).addTo(map);
-  		});
-
-
-
-});
-
+    }).addTo(map);
+                     map.fitBounds(datalayer.getBounds());
+                     });
 
   
+})
+
  
 </script>
+
 
   
 
