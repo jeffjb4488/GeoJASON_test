@@ -102,8 +102,8 @@ $.getJSON("data/points_test.geojson")
         }).addTo(map);
   
   
-  var info = L.control();
-var geojson2;
+var info = L.control();
+
 	
 info.onAdd = function (map) {
 	this._div = L.DomUtil.create('div', 'info');
@@ -151,7 +151,7 @@ info.addTo(map);
 		info.update(layer.feature.properties);
 	}
   
-
+var geojson2;
   
 	function resetHighlight(e) {
 		geojson2.resetStyle(e.target);
@@ -173,14 +173,14 @@ info.addTo(map);
     }
 };
 
-$.getJSON("data/polygon_test.geojson",function(geojson2){
+$.getJSON("data/polygon_test.geojson",function(geojsonTest){
 // add GeoJSON layer to the map once the file is loaded
-    var datalayer = L.Proj.geoJson(geojson2 ,{
-	     style:style,
-             onEachFeature: onEachFeature
+    geojson2 = L.Proj.geoJson(geojsonTest ,{
+	    style: style,
+        onEachFeature: onEachFeature
     }).addTo(map);
-                     map.fitBounds(datalayer.getBounds());
-                     });
+         map.fitBounds(geojson2.getBounds());
+         });
 
   
 })
