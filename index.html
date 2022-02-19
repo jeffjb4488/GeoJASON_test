@@ -74,9 +74,7 @@ html {
 
 
   <div id="map"></div>
-  <button id="getZoomButton" onclick="getCenterAndZoom();">Get Center and Zoom</button>
-
-
+  
       <script id="rendered-js" >
 var basemap_color = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
 var basemap_satellite = 'https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=kUPH9bhggOn8sGeOtVCW';
@@ -210,7 +208,7 @@ var geojson2;
 			click: zoomToFeature
 		});
 		   if (feature.properties && feature.properties.popupContent) {
-        layer.bindPopup(feature.properties.popupContent);
+        layer.bindPopup(content, {closeButton: true});
     }
 };
 
