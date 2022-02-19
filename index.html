@@ -24,14 +24,22 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
   
-<!--other files-->
+<!--other js files-->
 <script src='https://rawgit.com/kartena/Proj4Leaflet/master/lib/proj4-compressed.js'></script>
 <script src='https://kartena.github.io/Proj4Leaflet/src/proj4leaflet.js'></script>
-<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://unpkg.com/leaflet.tilelayer.mbtiles@latest/Leaflet.TileLayer.MBTiles.js"></script>
 <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
-<link rel="stylesheet" type="text/css" href="/general.css"/>
+<script type="text/javascript" src="js/L.Control.ZoomBar.js"></script>
+<script src="js/leaflet-sidebar.js"></script>
+
+<!--other css files-->
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/leaflet-sidebar.css" />
+<link rel="stylesheet" type="text/css" href="css/L.Control.ZoomBar.css"/>
+
+
+
 
   
 <style>
@@ -44,6 +52,7 @@ html {
   width: 100%;
   height: 100%;
 }
+
 </style>
 
   <script>
@@ -63,30 +72,59 @@ html {
 
 
   <div id="map"></div>
+  <button id="getZoomButton" onclick="getCenterAndZoom();">Get Center and Zoom</button>
 
 
       <script id="rendered-js" >
-var url_tile = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
-var overlay_tile = 'https://map-tile.server.burne138.msu.domains/Plan_Map_of_the_Highlands_1890_best_imagery_4326_mostzoom/{z}/{x}/{y}.png';
+var basemap_color = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
+var basemap_satellite = 'https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=kUPH9bhggOn8sGeOtVCW';
+var overlay_1890 = 'https://map-tile.server.burne138.msu.domains/Plan_Map_of_the_Highlands_1890_best_imagery_4326_mostzoom/{z}/{x}/{y}.png';
 
 
-var map = L.map('map', {editable: true}).setView([41.461070584121636, -70.56516015402862], 14);
+var map = L.map('map', {
+    editable: true,
+    minZoom: 12,
+    maxZoom: 18,
+    zoomControl: false}).setView([41.461070584121636, -70.56516015402862], 14);
+    
+var zoom_bar = new L.Control.ZoomBar({position: 'topright'}).addTo(map);
 
-var tilelayer = L.tileLayer(url_tile, {
+var basemapLayerColor = L.tileLayer(basemap_color, {
   noWrap: true,
+  minZoom: 10,
   maxZoom: 18,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-var overlaylayer = L.tileLayer(overlay_tile, {
+var basemapLayerSatellite = L.tileLayer(basemap_satellite,{
+        noWrap: true,
+        tileSize: 512,
+        zoomOffset: -1,
+        maxZoom: 18,
+        minZoom: 10,
+        attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
+        crossOrigin: true
+      }).addTo(map);
+
+var overlayLayer1890 = L.tileLayer(overlay_1890, {
   noWrap: true,
-  opacity: 0.6
+  opacity: 0.6,
+  attribution: 'Historic Map, <a href="https://collections.leventhalmap.org/search/commonwealth:x059cd109" target="_blank">Boston Public Library Norman B. Leventhal Map Center'
 }).addTo(map);
+
+var baseMaps = {
+    "Satellite": basemapLayerSatellite,
+    "Standard": basemapLayerColor
+   };
+
+var overlayMaps = {
+    "Historic Map": overlayLayer1890
+};
+
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+
 
 proj4.defs("urn:ogc:def:crs:EPSG::26987", "+proj=lcc +lat_1=41.48333333333333 +lat_2=41.28333333333333 +lat_0=41 +lon_0=-70.5 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
-
-
-
 
 $.getJSON("data/points_test.geojson")
     .then(function (geojson1) {
@@ -197,3 +235,4 @@ $.getJSON("data/polygon_test.geojson",function(geojsonTest){
 </body>
 
 </html>
+
