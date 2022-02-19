@@ -20,25 +20,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   
 <!--leaflet files-->
- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
   
 <!--other js files-->
 <script src='https://rawgit.com/kartena/Proj4Leaflet/master/lib/proj4-compressed.js'></script>
 <script src='https://kartena.github.io/Proj4Leaflet/src/proj4leaflet.js'></script>
-<script src="https://unpkg.com/leaflet.tilelayer.mbtiles@latest/Leaflet.TileLayer.MBTiles.js"></script>
 <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
 <script type="text/javascript" src="js/L.Control.ZoomBar.js"></script>
 <script src="js/leaflet-sidebar.js"></script>
+<script src="js/SliderControl.js"></script>
+<script src="js/leaflet.timedimension.src.js"></script>
+<script type="text/javascript" src="../js/leaflet.timedimension.layer.geojson.js"></script>
 
 <!--other css files-->
 <link rel="stylesheet" type="text/css" href="/css/general.css"/>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/leaflet-sidebar.css" />
-<link rel="stylesheet" type="text/css" href="css/L.Control.ZoomBar.css"/>
-
-
+<link rel="stylesheet" href="/css/leaflet-sidebar.css" />
+<link rel="stylesheet" type="text/css" href="/css/L.Control.ZoomBar.css"/>
+<link rel="stylesheet" type="text/css" href="/css/leaflet.timedimension.control.css"/>
 
 
   
@@ -154,7 +156,7 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
 this._div.innerHTML = '<h4>Lot Information</h4>' +  (props ?
-	'<b>' + props.title + '</b><br />' + props.time + ' date ' + '</b><br />' + props.discript + '</b><br />' : 'Hover over a lot');
+	'<b>' + " Lot: " + props.Lot_Number + '</b><br />' + props.time + ' date ' + '</b><br />' + " Property Owner: " + props.Grantee + '</b><br />' : 'Hover over a lot');
 };
 
   
@@ -226,13 +228,3 @@ $.getJSON("data/polygon_test.geojson",function(geojsonTest){
 
  
 </script>
-
-
-  
-
-  
-
-</body>
-
-</html>
-
