@@ -134,11 +134,14 @@ function onEachFeature (feature, layer) {
 			layer.on('mouseout', function() { layer.closePopup(); });
 		    }
 		},
+		 pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng);
+		}
 		});
 	      
        
 $.getJSON("data/points_test_30.geojson", function(json) {
-	propertyPoints = L.geoJSON(json, onEachFeature);
+	propertyPoints = L.geoJSON(json, optionsObject);
 	
 		   
 
