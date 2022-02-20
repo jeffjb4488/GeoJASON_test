@@ -126,7 +126,10 @@ L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 
 
-
+var deedIcon = L.icon({
+  iconUrl: 'icons/times-solid.svg',
+  iconSize: [30, 30],
+ });
 	
 
 var optionsObject = {
@@ -138,7 +141,21 @@ var optionsObject = {
 	};
 
 $.getJSON("data/points_test_30.geojson", function(json) {
-	var propertyPoints = L.geoJSON(json, optionsObject);
+	var propertyPoints = L.geoJSON(json, {
+		onEachFeature: optionsObject,
+		pointToLayer: function (feature, latlng){
+	    }).addTo(map);
+
+	function optionsObject(feature, marker){
+	  marker.on('mouseover', function(alter_style){
+	    var leaflet_obj2 = alter_style.target;
+	    marker.setIcon(marker.smallIcon);
+	  });
+	  marker.on('mouseout', function(origin_style){
+	    var leaflet_obj3 = origin_style.target;
+	    marker.setIcon(deedIcon);
+	  })
+	});
 
 
      // Set the sliderControl options
