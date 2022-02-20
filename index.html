@@ -143,7 +143,6 @@ var optionsObject = {
 $.getJSON("data/points_test_30.geojson", function(json) {
 	var propertyPoints = L.geoJSON(json, {
 		onEachFeature: mouse_events_deed,
-		onEachFeature: optionsObject,
 		pointToLayer: function (feature, latlng){
 		var smallIcon = L.icon({
 		      iconUrl: '/icons/zoom-to-start-26.png',
