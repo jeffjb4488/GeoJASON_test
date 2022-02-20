@@ -142,11 +142,21 @@ var optionsObject = {
 
 $.getJSON("data/points_test_30.geojson", function(json) {
 	var propertyPoints = L.geoJSON(json, {
+		onEachFeature: mouse_events_deed,
 		onEachFeature: optionsObject,
 		pointToLayer: function (feature, latlng){
-	    }).addTo(map);
-
-	function optionsObject(feature, marker){
+		var smallIcon = L.icon({
+		      iconUrl: '/icons/zoom-to-start-26.png',
+		      iconSize: [50, 40],
+		      });
+		    var marker = L.marker(latlng, {icon: deedIcon});
+		    marker.smallIcon = smallIcon;
+		    return marker;
+		}
+		}).addTo(map);
+	
+		   
+	function mouse_events_deed(feature, marker){
 	  marker.on('mouseover', function(alter_style){
 	    var leaflet_obj2 = alter_style.target;
 	    marker.setIcon(marker.smallIcon);
@@ -155,7 +165,7 @@ $.getJSON("data/points_test_30.geojson", function(json) {
 	    var leaflet_obj3 = origin_style.target;
 	    marker.setIcon(deedIcon);
 	  })
-	});
+	}
 
 
      // Set the sliderControl options
