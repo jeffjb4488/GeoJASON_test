@@ -135,7 +135,7 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
 this._div.innerHTML = '<h4>Lot Information</h4>' +  (props ?
-	'<b>' + props.title + '</b><br />' + props.time + ' date ' + '</b><br />' + props.discript + '</b><br />' : 'Hover over a lot');
+	'<b>' + props.Lot_Number + '</b><br />' + props.time + ' date ' + '</b><br />' + props.Grantee + '</b><br />' : 'Hover over a lot');
 };
 
 info.addTo(map);  
@@ -150,6 +150,24 @@ function style(feature) {
 		fillColor: 'green'
 	};
 }
+
+function highlightFeature(e) {
+	var layer = e.target;
+
+	layer.setStyle({
+		weight: 3,
+		color: 'black',
+		dashArray: '',
+		fillOpacity: 0.7
+	});
+
+	if (!L.Browser.ie && !L.Browser.opera) {
+		layer.bringToFront();
+	}
+
+	info.update(layer.feature.properties);
+}
+	     
 
 	      
 var optionsObject = {
