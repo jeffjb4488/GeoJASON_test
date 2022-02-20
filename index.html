@@ -137,6 +137,7 @@ if (feature.properties && feature.properties.popupContent) {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng);
         }
+ });
 	      
        
 $.getJSON("data/points_test_30.geojson", function(json) {
