@@ -138,7 +138,7 @@ function onEachFeature (feature, layer) {
 	      
        
 $.getJSON("data/points_test_30.geojson", function(json) {
-	propertyPoints = L.geoJSON(json, onEachFeature);
+	var propertyPoints = L.geoJSON(json, onEachFeature);
 	
 		   
 
