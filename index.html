@@ -135,18 +135,13 @@ var optionsObject = {
     function onEachFeature (feature, layer) {
        var content ="<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + " /></div><div><h4>" + feature.properties.Grantee + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Cost + "</p></div>";
        layer.bindPopup(content, {closeButton: true});
-	layer.on(
-        'mouseover': function(e){
-            layer.setIcon(highlightMarker);
-            layer.openTooltip();
+	if (feature.properties && feature.properties.popupContent) {
+	layer.bindPopup(feature.properties.popupContent, {closeButton: false, offset: L.point(0, -20)});
+	layer.on('mouseover', function() { layer.openPopup(); });
+	layer.on('mouseout', function() { layer.closePopup(); });
+    	}
         },
-        'mouseout': function(e){
-            console.log("mouseout");
-            layer.setIcon(defaultMarker);
-            layer.closeTooltip();
-        }
-    );	
-    };
+    });
 
 $.getJSON("data/points_test_30.geojson", function(json) {
 	var propertyPoints = L.geoJSON(json, optionsObject);
