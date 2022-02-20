@@ -125,7 +125,7 @@ var overlayMaps = {
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 
-var optionsObject = {
+var optionsObject2 = {
 	onEachFeature: onEachFeature
     };
     function onEachFeature (feature, layer) {
@@ -134,7 +134,7 @@ var optionsObject = {
     };
 
 $.getJSON("data/points_test_30.geojson", function(json) {
-	var propertyPoints = L.geoJSON(json, optionsObject);
+	var propertyPoints = L.geoJSON(json, optionsObject2);
 
 
 
