@@ -124,14 +124,6 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-var info = L.control();
-info.onAdd = function (map) {
-	this._div = L.DomUtil.create('div', 'info');
-	this.update();
-	return this._div;
-	};
-
-
 var optionsObject = {
                 onEachFeature: onEachFeature
             };
