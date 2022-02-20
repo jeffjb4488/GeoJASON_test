@@ -125,17 +125,26 @@ var overlayMaps = {
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 
-function onEachFeature(feature, layer) {
-    // does this feature have a property named popupContent?
-    if (feature.properties && feature.properties.popupContent) {
-        layer.bindPopup(feature.properties.popupContent);
-    }
-}
+var optionsObject = {
+                onEachFeature: onEachFeature
+            };
+            function onEachFeature (feature, layer) {
+               var content ="<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + " /></div><div><h4>" + feature.properties.Grantee + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Cost + "</p></div>";
+               layer.bindPopup(content, {closeButton: true});
+	       layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+		   if (feature.properties && feature.properties.popupContent) {
+        	layer.bindPopup(feature.properties.popupContent);
+    		}
+            };
 
 
 
 $.getJSON("data/points_test_30.geojson", function(json) {
-	propertyPoints = L.geoJSON(json, onEachFeature);
+	propertyPoints = L.geoJSON(json, optionsObject);
 	
 		   
 
