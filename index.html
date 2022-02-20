@@ -140,6 +140,18 @@ this._div.innerHTML = '<h4>Lot Information</h4>' +  (props ?
 
 info.addTo(map);  
 	      
+function style(feature) {
+	return {
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7,
+		fillColor: 'green'
+	};
+}
+
+	      
 var optionsObject = {
 onEachFeature: onEachFeature,
 
