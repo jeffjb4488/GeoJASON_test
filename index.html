@@ -125,8 +125,21 @@ var overlayMaps = {
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 
-var info_point = L.control();
+var info = L.control();
+info.onAdd = function (map) {
+	this._div = L.DomUtil.create('div', 'info');
+	this.update();
+	return this._div;
+	};
 
+//will pull up anything put in props//
+
+info.update = function (props) {
+this._div.innerHTML = '<h4>Lot Information</h4>' +  (props ?
+	'<b>' + props.title + '</b><br />' + props.time + ' date ' + '</b><br />' + props.discript + '</b><br />' : 'Hover over a lot');
+};
+
+info.addTo(map);
 	
 
 var optionsObject2 = {
@@ -154,86 +167,12 @@ $.getJSON("data/points_test_30.geojson", function(json) {
 
     // Initialize the slider
     sliderControl1.startSlider();
-	
-var info = L.control();
 
 	
-info.onAdd = function (map) {
-	this._div = L.DomUtil.create('div', 'info');
-	this.update();
-	return this._div;
-	};
 
-//will pull up anything put in props//
 
-info.update = function (props) {
-this._div.innerHTML = '<h4>Lot Information</h4>' +  (props ?
-	'<b>' + props.title + '</b><br />' + props.time + ' date ' + '</b><br />' + props.discript + '</b><br />' : 'Hover over a lot');
-};
+	
 
-  
-        
-info.addTo(map);  
-  
-  
-	function style(feature) {
-		return {
-			weight: 2,
-			opacity: 1,
-			color: 'white',
-			dashArray: '3',
-			fillOpacity: 0.7,
-			fillColor: 'green'
-		};
-	}
-  
-	function highlightFeature(e) {
-		var layer = e.target;
-		    
-    layer.setStyle({
-	weight: 5,
-	color: '#666',
-	dashArray: '',
-	fillOpacity: 0.7
-    });
-
-		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-			layer.bringToFront();
-		}
-
-		info.update(layer.feature.properties);
-	}
-  
-var geojson2;
-  
-	function resetHighlight(e) {
-		geojson2.resetStyle(e.target);
-		info.update();
-	}
-
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-
-	function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-		   if (feature.properties && feature.properties.popupContent) {
-        layer.bindPopup(feature.properties.popupContent);
-    }
-};
-
-$.getJSON("data/test_polygon_wgs84_2.geojson",function(geojsonTest){
-// add GeoJSON layer to the map once the file is loaded
-    geojson2 = L.Proj.geoJson(geojsonTest ,{
-	    style: style,
-        onEachFeature: onEachFeature
-    }).addTo(map);
-         map.fitBounds(geojson2.getBounds());
-         });
 
   
   
