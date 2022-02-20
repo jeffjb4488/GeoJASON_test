@@ -124,13 +124,30 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
+var info = L.control();
+info.onAdd = function (map) {
+	this._div = L.DomUtil.create('div', 'info');
+	this.update();
+	return this._div;
+	};
+
+//will pull up anything put in props//
+
+info.update = function (props) {
+this._div.innerHTML = '<h4>Lot Information</h4>' +  (props ?
+	'<b>' + props.title + '</b><br />' + props.time + ' date ' + '</b><br />' + props.discript + '</b><br />' : 'Hover over a lot');
+};
+
+	      
 var optionsObject = {
-                onEachFeature: onEachFeature
-            };
-            function onEachFeature (feature, layer) {
-               var content ="<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + " /></div><div><h4>" + feature.properties.Grantee + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Cost + "</p></div>";
-               layer.bindPopup(content, {closeButton: true});
-		};
+onEachFeature: onEachFeature,
+
+};
+	      
+function onEachFeature (feature, layer) {
+var content ="<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + " /></div><div><h4>" + feature.properties.Grantee + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Cost + "</p></div>";
+layer.bindPopup(content, {closeButton: true});
+};
 
 
 
