@@ -187,9 +187,8 @@ var propertyPoints;
 		});
 		var content ="<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + " /></div><div><h4>" + feature.properties.Grantee + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Cost + "</p></div>";
 	layer.bindPopup(content, {closeButton: true});
-	};
-    }
-};
+	}
+      };
 
 	      
 $.getJSON("data/points_test_30.geojson", function(json) {
