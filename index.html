@@ -128,16 +128,13 @@ var optionsObject = {
                 onEachFeature: onEachFeature
             };
 function onEachFeature (feature, layer) {
-if (feature.properties && feature.properties.popupContent) {
-                layer.bindPopup(feature.properties.popupContent, {closeButton: false, offset: L.point(0, -20)});
-                layer.on('mouseover', function() { layer.openPopup(); });
-                layer.on('mouseout', function() { layer.closePopup(); });
-            }
-        },
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng);
-        }
- });
+	if (feature.properties && feature.properties.popupContent) {
+			layer.bindPopup(feature.properties.popupContent, {closeButton: false, offset: L.point(0, -20)});
+			layer.on('mouseover', function() { layer.openPopup(); });
+			layer.on('mouseout', function() { layer.closePopup(); });
+		    }
+		},
+		});
 	      
        
 $.getJSON("data/points_test_30.geojson", function(json) {
