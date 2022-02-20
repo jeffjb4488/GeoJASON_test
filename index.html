@@ -212,7 +212,7 @@ var geojson2;
     }
 };
 
-$.getJSON("data/polygon_test_wgs.geojson",function(geojsonTest){
+$.getJSON("data/polygon_test.geojson",function(geojsonTest){
 // add GeoJSON layer to the map once the file is loaded
     geojson2 = L.Proj.geoJson(geojsonTest ,{
 	    style: style,
