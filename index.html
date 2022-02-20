@@ -124,21 +124,17 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-function onEachFeature (feature, layer) {
-	if (feature.properties && feature.properties.popupContent) {
-			layer.bindPopup(feature.properties.popupContent, {closeButton: false, offset: L.point(0, -20)});
-			layer.on('mouseover', function() { layer.openPopup(); });
-			layer.on('mouseout', function() { layer.closePopup(); });
-		    }
-		},
-		 pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng);
-		}
-		});
+var optionsObject = {
+                onEachFeature: onEachFeature
+            };
+            function onEachFeature (feature, layer) {
+                var content = "<div style='clear: both'></div><div><h4>" + feature.properties.title + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.description + "</p></div>";
+                layer.bindPopup(content, {closeButton: true});
+            };
 	      
        
 $.getJSON("data/points_test_30.geojson", function(json) {
-	var propertyPoints = L.geoJSON(json, onEachFeature);
+	var propertyPoints = L.geoJSON(json, optionsObject);
 	
 		   
 
