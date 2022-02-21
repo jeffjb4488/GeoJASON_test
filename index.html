@@ -199,10 +199,7 @@ var geojson2;
 			mouseout: resetHighlight,
 			click: zoomToFeature
 		});
-		   if (feature.properties && feature.properties.popupContent) {
-        layer.bindPopup(feature.properties.popupContent);
-    }
-};
+	   };
 
 $.getJSON("data/test_polygon_wgs84_2.geojson",function(geojsonTest){
 // add GeoJSON layer to the map once the file is loaded
