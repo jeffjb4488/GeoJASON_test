@@ -124,32 +124,34 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 	  
-var highlightStyle = {
-    color: '#2262CC', 
-    weight: 3,
-    opacity: 0.6,
-    fillOpacity: 0.65,
-    fillColor: '#2262CC'
-};
+var myIcon = L.icon({
+	iconUrl: '/icons/times-solid.svg',
+	iconSize: [19, 48],
+	shadowUrl: 'my-icon-shadow.png',
+	shadowSize: [11, 48],
+	});
 
 function onEachFeature1 (feature, layer) {
 	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
 	layer.bindPopup(content, {closeButton: true});
-	var tooltip = "<div style='clear: both'></div><div><h4>" + 'Lot Number ' + feature.properties.Lot_Number + ' owned by ' + feature.properties.Grantee + "</h4></div>";
+	layer.setIcon(myIcon);
+    var tooltip = "<div style='clear: both'></div><div><h4>" + 'Lot Number ' + feature.properties.Lot_Number + ' owned by ' + feature.properties.Grantee + "</h4></div>";
 	layer.bindTooltip(tooltip);
 	layer.on('mouseover', function (e) {
             this.openTooltip();
         });
-        layer.on('mouseout', function (e) {
-            this.closeTooltip();
-        });
+    layer.on('mouseout', function (e) {
+        this.closeTooltip();
+    });
 	};
+	
+
 	      
        
 $.getJSON("data/points_test_30.geojson", function(json) {
 	var propertyPoints = L.geoJSON(json, {
 	       onEachFeature: onEachFeature1,
-		});
+	       });
 
 
 	
@@ -218,7 +220,7 @@ var geojson2;
 		});
 	   };
 
-$.getJSON("data/test_polygon_30.geojson",function(geojsonTest){
+$.getJSON("data/polygon_test_30.geojson",function(geojsonTest){
 // add GeoJSON layer to the map once the file is loaded
     geojson2 = L.Proj.geoJson(geojsonTest ,{
 	    style: style,
