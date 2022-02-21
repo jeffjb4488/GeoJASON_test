@@ -132,8 +132,23 @@ function onEachFeature1 (feature, layer) {
        
 $.getJSON("data/points_test_30.geojson", function(json) {
 	var propertyPoints = L.geoJSON(json, {
-	       onEachFeature: onEachFeature1
+	       onEachFeature: onEachFeature1,
+	 pointToLayer: function(feature, latlng) {
+        feature.properties.Lot_Number = '<b>'+ feature.properties.Grantee + '</b>; ' + 
+    feature.properties.time
+            label = String(feature.properties.Grantee)
+        return L.circleMarker(latlng, {
+            radius:6,
+            opacity: .5,
+            color: 'black',
+            fillColor:  'black',
+            fillOpacity: 0.8
+        }).bindTooltip(label, {permanent: false, direction: "top", className: "my- 
+     labels"}).openTooltip(); 
+      },
 	});
+
+
 	
 		   
 
