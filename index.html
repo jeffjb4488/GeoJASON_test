@@ -179,11 +179,15 @@ function style(feature) {
 			layer.bringToFront();
 		}
 
+		info.update(layer.feature.properties);
+	}
+  
 var geojson2;
   
 	function resetHighlight(e) {
 		geojson2.resetStyle(e.target);
-		}
+		info.update();
+	}
 
 	function zoomToFeature(e) {
 		map.fitBounds(e.target.getBounds());
@@ -197,10 +201,8 @@ var geojson2;
 		});
 		   if (feature.properties && feature.properties.popupContent) {
         layer.bindPopup(feature.properties.popupContent);
-	   }
-    };
-
-		   
+    }
+};
 
 $.getJSON("data/test_polygon_wgs84_2.geojson",function(geojsonTest){
 // add GeoJSON layer to the map once the file is loaded
