@@ -135,9 +135,7 @@ function onEachFeature1 (feature, layer) {
         layer.on('mouseout', function (e) {
             this.closeTooltip();
         });
-	layer.on({
-		click: zoomToFeature
-		});
+	layer.on('click', zoomToFeature);
 	};
 	      
        
@@ -199,10 +197,6 @@ var geojson2;
   
 	function resetHighlight(e) {
 		geojson2.resetStyle(e.target);
-	}
-
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
 	}
 
 	function onEachFeature(feature, layer) {
