@@ -124,6 +124,14 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 	  
+var highlightStyle = {
+    color: '#2262CC', 
+    weight: 3,
+    opacity: 0.6,
+    fillOpacity: 0.65,
+    fillColor: '#2262CC'
+};
+
 function onEachFeature1 (feature, layer) {
 	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
 	layer.bindPopup(content, {closeButton: true});
@@ -198,11 +206,16 @@ var geojson2;
 		geojson2.resetStyle(e.target);
 	}
 
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
 	function onEachFeature(feature, layer) {
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
-			});
+			click: zoomToFeature
+		});
 	   };
 
 $.getJSON("data/test_polygon_wgs84_2.geojson",function(geojsonTest){
