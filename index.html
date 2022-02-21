@@ -133,6 +133,12 @@ function onEachFeature1 (feature, layer) {
 $.getJSON("data/points_test_30.geojson", function(json) {
 	var propertyPoints = L.geoJSON(json, {
 	       onEachFeature: onEachFeature1,
+		if (feature.properties && feature.properties.popupContent) {
+                layer.bindPopup(feature.properties.Grabtee, {closeButton: false, offset: L.point(0, -20)});
+                layer.on('mouseover', function() { layer.openPopup(); });
+                layer.on('mouseout', function() { layer.closePopup(); });
+            }
+        },
 	 });
 
 
