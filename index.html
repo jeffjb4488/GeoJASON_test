@@ -134,9 +134,9 @@ var highlightStyle = {
 
 function onEachFeature1 (feature, layer) {
 	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
-	layer.bindPopup1(content, {closeButton: true});
+	layer.bindPopup(content, {closeButton: true});
 	var contentPop = "<div style='clear: both'></div><div><h4>" + 'Lot Number ' + feature.properties.Lot_Number + ' owned by ' + feature.properties.Grantee + "</h4></div>";
-	layer.bindPopup2(contentPop);
+	layer.bindPopup(contentPop);
 	layer.on('mouseover', function (e) {
             this.openPopup();
         });
