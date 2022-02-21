@@ -135,38 +135,6 @@ var highlightStyle = {
 function onEachFeature1 (feature, layer) {
 	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
 	layer.bindPopup(content, {closeButton: true});
-	layer.on("mouseover", function (e) {
-        // Change the style to the highlighted version
-        layer.setStyle(highlightStyle);
-        // Create a popup with a unique ID linked to this record
-        var popup = ("<div></div>", {
-            id: "popup-" + properties.Grantee,
-            css: {
-                position: "absolute",
-                bottom: "85px",
-                left: "50px",
-                zIndex: 1002,
-                backgroundColor: "white",
-                padding: "8px",
-                border: "1px solid #ccc"
-            }
-        });
-	var hed = ("<div></div>", {
-	    text: "District " + properties.Grantee + ": " + properties.Lot_Number,
-	    css: {fontSize: "16px", marginBottom: "3px"}
-        }).appendTo(popup);
-        // Add the popup to the map
-        popup.appendTo(map);
-      });
-	layer.on("mouseout", function (e) {
-        // Start by reverting the style back
-        layer.setStyle(defaultStyle); 
-        // And then destroying the popup
-        $("popup-" + properties.Grantee).remove();
-      });
-      // Close the "anonymous" wrapper function, and call it while passing
-      // in the variables necessary to make the events work the way we want.
-   	 })(layer, feature.properties);
 	};
 	      
        
