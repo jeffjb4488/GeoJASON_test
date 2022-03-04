@@ -124,35 +124,7 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-var myIcon = L.icon({
-	iconUrl: 'icons/house-solid.svg',
-	iconSize: [20, 20],
-	});
-
-
-function onEachFeature1 (feature, layer) {
-	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
-	layer.bindPopup(content, {closeButton: true});
-	layer.setIcon(myIcon);
-    var tooltip = "<div style='clear: both'></div><div><h4>" + 'Lot Number ' + feature.properties.Lot_Number + ' owned by ' + feature.properties.Grantee + "</h4></div>";
-	layer.bindTooltip(tooltip);
-	layer.on('mouseover', function (e) {
-            this.openTooltip();
-        });
-    layer.on('mouseout', function (e) {
-        this.closeTooltip();
-    });
-    layer.on('click', function (e){
-        this.closeTooltip();
-    });
-    };
-	
-$.getJSON("data/points_test_30_range.geojson", function(json) {
-	var propertyPoints = L.geoJSON(json, {
-	       onEachFeature: onEachFeature1,
-	       });
-
-    
+ 
 function style(feature) {
 		return {
 			weight: 2,
@@ -188,7 +160,7 @@ $.getJSON("data/polygon_test_30_tabs.geojson",function(json){
         onEachFeature: onEachFeature
     }).addTo(map);
          map.fitBounds(polygons.getBounds());
-         });
+       
   
 // Set the sliderControl options
             var sliderControl1 = L.control.sliderControl( {
