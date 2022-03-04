@@ -10,7 +10,7 @@ L.Control.SliderControl = L.Control.extend({
         minValue: 0,
         showAllOnStart: false,
         markers: null,
-        range: false,
+        range: true,
         follow: 0,
         sameDate: false,
         alwaysShowDate : false,
@@ -336,5 +336,4 @@ L.Control.SliderControl = L.Control.extend({
 L.control.sliderControl = function (options) {
     return new L.Control.SliderControl(options);
 };
-
 
