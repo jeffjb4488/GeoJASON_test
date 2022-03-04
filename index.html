@@ -124,19 +124,12 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
+$.getJSON("data/polygon_test_30_tabs.geojson", function(json) {
+                var polygons = L.geoJSON(json);
 
-$.getJSON("data/polygon_test_30_tabs.geojson",function(json){
-// add GeoJSON layer to the map once the file is loaded
-    var geojson1 = L.geoJson(json ,{
-	    style: style,
-        onEachFeature: onEachFeature
-    }).addTo(map);
-         map.fitBounds(geojson1.getBounds());
-         });
-
-// Set the sliderControl options
+                // Set the sliderControl options
                 var sliderControl1 = L.control.sliderControl( {
-                    layer: geojson1, //REQUIRED
+                    layer: polygons, //REQUIRED
                     alwaysShowDate: true,
                     range: true,
                     showAllPopups: false, // to show all popups, instead of one, same as popup option "autoClose: false"
@@ -148,26 +141,6 @@ $.getJSON("data/polygon_test_30_tabs.geojson",function(json){
 
                 // Initialize the slider
                 sliderControl1.startSlider();
-	      
-	      });
-	      
-	function resetHighlight(e) {
-		geojson1.resetStyle(e.target);
-	}
-
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-
-	function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-	   };
-	
-});
 
  
 </script>
