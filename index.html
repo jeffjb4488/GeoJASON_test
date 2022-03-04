@@ -181,25 +181,6 @@ function style(feature) {
 	}
 
 		
-  
-var polygons;
-  
-	function resetHighlight(e) {
-		geojson2.resetStyle(e.target);
-	}
-
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-
-	function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-	   };
-
 $.getJSON("data/polygon_test_30_tabs.geojson",function(json){
 // add GeoJSON layer to the map once the file is loaded
    var polygons = L.geoJson(json ,{
@@ -223,7 +204,25 @@ $.getJSON("data/polygon_test_30_tabs.geojson",function(json){
 
             // Initialize the slider
             sliderControl1.startSlider();
-        });  
+
+  
+	function resetHighlight(e) {
+		polygons.resetStyle(e.target);
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	   };
+	
+
 
 var legend = L.control({ position: "bottomright" });
 
@@ -243,9 +242,6 @@ legend.addTo(map);
 
  
 </script>
-
-
-  
 
   
 
