@@ -183,9 +183,9 @@ var polygons
 	      
 $.getJSON("data/polygon_test_30_tabs.geojson",function(json){
 // add GeoJSON layer to the map once the file is loaded
-   	polygons = L.geoJson(json ,{
+   	var polygons = L.geoJson(json ,{
 	    style: style,
-        onEachFeature: onEachFeature
+            onEachFeature: onEachFeature
     }).addTo(map);
          map.fitBounds(polygons.getBounds());
        
@@ -193,6 +193,7 @@ $.getJSON("data/polygon_test_30_tabs.geojson",function(json){
 // Set the sliderControl options
             var sliderControl1 = L.control.sliderControl( {
                 layer: polygons, //REQUIRED
+		showAllOnStart: false,
                 alwaysShowDate: true,
                 range: true,
                 showAllPopups: false, // to show all popups, instead of one, same as popup option "autoClose: false"
