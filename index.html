@@ -121,7 +121,27 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
- 
+function onEachFeature (feature, layer) {
+	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
+	layer.bindPopup(content, {closeButton: true});
+	var tooltip = "<div style='clear: both'></div><div><h4>" + 'Lot Number ' + feature.properties.Lot_Number + ' owned by ' + feature.properties.Grantee + "</h4></div>";
+	layer.bindTooltip(tooltip);
+	layer.on('mouseover', function (e) {
+            this.openTooltip();
+            this.highlightFeature();
+        });
+    layer.on('mouseout', function (e) {
+        this.closeTooltip();
+        this.resetHighlight();
+    });
+    layer.on('dbclick', function (e) {
+        this.zoomToFeature();
+    });
+    layer.on('click', function (e){
+        this.closeTooltip();
+    });
+    };
+	      
 function style(feature) {
 		return {
 			weight: 2,
@@ -132,27 +152,38 @@ function style(feature) {
 			fillColor: 'green',
 		};
 	}
-  
-	function highlightFeature(e) {
-		var layer = e.target;
-		    
-    layer.setStyle({
-	weight: 5,
-	color: '#666',
-	dashArray: '',
-	fillOpacity: 0.7
-    });
 
-		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-			layer.bringToFront();
-		}
-		
+function highlightFeature(e) {
+	var layer = e.target;
+
+	layer.setStyle({
+		weight: 5,
+		color: '#666',
+		dashArray: '',
+		fillOpacity: 0.7
+	});
+
+	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+		layer.bringToFront();
 	}
 
-		
+	info.update(layer.feature.properties);
+}
+	
+var polygons
+
+	function resetHighlight(e) {
+		polygons.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+	      
 $.getJSON("data/polygon_test_30_tabs.geojson",function(json){
 // add GeoJSON layer to the map once the file is loaded
-   var polygons = L.geoJson(json ,{
+   	polygons = L.geoJson(json ,{
 	    style: style,
         onEachFeature: onEachFeature
     }).addTo(map);
