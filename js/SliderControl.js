@@ -10,7 +10,7 @@ L.Control.SliderControl = L.Control.extend({
         minValue: 0,
         showAllOnStart: false,
         markers: null,
-        range: true,
+        range: false,
         follow: 0,
         sameDate: false,
         alwaysShowDate : false,
@@ -37,11 +37,13 @@ L.Control.SliderControl = L.Control.extend({
         var sliderContainer = L.DomUtil.create('div', '', this.sliderBoxContainer);
         sliderContainer.id = "leaflet-slider";
         sliderContainer.style.width = "200px";
+        $(this.sliderBoxContainer).append('<div id="slider-min"></div><div id="leaflet-slider" style="width:280px; inline-block; margin: 0 5px 0 5px;"></div><div id="slider-max"></div><div id="slider-current"><span class="start-time"></span>-<span class="end-time"></span></div>');
 
         L.DomUtil.create('div', 'ui-slider-handle', sliderContainer);
         this.timestampContainer = L.DomUtil.create('div', 'slider', this.container);
         this.timestampContainer.id = "slider-timestamp";
         this.timestampContainer.style.cssText = "width:200px; margin-top:3px; color: white; background-color:#0074d9; font-size: 16px; font-weight: bold; text-align:center; border-radius:10px; display:none;";
+
 
 
         //Prevent map panning/zooming while using the slider
@@ -114,7 +116,17 @@ L.Control.SliderControl = L.Control.extend({
         } else {
             console.log("Error: You have to specify a layer via new SliderControl({layer: your_layer});");
         }
-        return this.container;
+        $('#slider-min', this.sliderBoxContainer).html(this.options.markers[this.options.minValue].feature.properties[this.options.timeAttribute]);
+        $('#slider-max', this.sliderBoxContainer).html(this.options.markers[this.options.maxValue].feature.properties[this.options.timeAttribute]);
+                this.$currentStartDiv = $('#slider-current .start-time', this.sliderBoxContainer);
+        this.$currentEndDiv = $('#slider-current .end-time', this.sliderBoxContainer);
+        this._updateCurrentDiv(0,1);
+
+        return this.sliderBoxContainer;
+    },
+    _updateCurrentDiv: function (startIdx, endIdx) {
+this.$currentStartDiv.html(this.options.markers[startIdx].feature.properties[this.options.timeAttribute]);
+        this.$currentEndDiv.html(this.options.markers[endIdx].feature.properties[this.options.timeAttribute]);
     },
 
     onRemove: function (map) {
@@ -336,4 +348,3 @@ L.Control.SliderControl = L.Control.extend({
 L.control.sliderControl = function (options) {
     return new L.Control.SliderControl(options);
 };
-
