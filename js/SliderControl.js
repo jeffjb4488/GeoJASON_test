@@ -1,6 +1,6 @@
 L.Control.SliderControl = L.Control.extend({
     options: {
-        position: 'topright',
+        position: 'topleft',
         layer: null,
         timeAttribute: 'time',
         isEpoch: false,     // whether the time attribute is seconds elapsed from epoch
@@ -27,28 +27,30 @@ L.Control.SliderControl = L.Control.extend({
         L.Util.setOptions(this, options);
         this._layer = this.options.layer;
         L.extend(this, L.Mixin.Events);
-    },
+        },
 
     onAdd: function (map) {
         this.options.map = map;
         // Create a control sliderContainer with a jquery ui slider
         this.container = L.DomUtil.create('div', '', this._container);
         this.sliderBoxContainer = L.DomUtil.create('div', 'slider', this.container);
-        var sliderContainer = L.DomUtil.create('div', '', this.sliderBoxContainer);
-        sliderContainer.id = "leaflet-slider";
-        sliderContainer.style.width = "200px";
-        $(this.sliderBoxContainer).append('<div id="slider-min"></div><div id="leaflet-slider" style="width:280px; inline-block; margin: 0 5px 0 5px;"></div><div id="slider-max"></div><div id="slider-current"><span class="start-time"></span>-<span class="end-time"></span></div>');
-
-        L.DomUtil.create('div', 'ui-slider-handle', sliderContainer);
-        this.timestampContainer = L.DomUtil.create('div', 'slider', this.container);
-        this.timestampContainer.id = "slider-timestamp";
-        this.timestampContainer.style.cssText = "width:200px; margin-top:3px; color: white; background-color:#0074d9; font-size: 16px; font-weight: bold; text-align:center; border-radius:10px; display:none;";
+       var sliderContainer = L.DomUtil.create('div', 'slider', this._container);
+       $(sliderContainer).append('<div id="slider-min"></div><div id="leaflet-slider" style="width:200px; inline-block; margin: 0 5px 0 5px;"></div><div id="slider-max"></div><div id="slider-current"><span class="start-time"></span> - <span class="end-time"></span></div>');
+       
+       
 
 
-
-        //Prevent map panning/zooming while using the slider
-        L.DomEvent.disableClickPropagation(this.sliderBoxContainer);
-        this._map.on('mouseup',this.clearTimestamp,this);
+        $(sliderContainer).mousedown(function () {
+            map.dragging.disable();
+        });
+        
+        $(document).mouseup(function () {
+            map.dragging.enable();
+            //Hide the slider timestamp if not range and option alwaysShowDate is set on false
+            if (options.range || !options.alwaysShowDate) {
+                $('#slider-timestamp').html('');
+            }
+        });
 
 
         var options = this.options;
@@ -116,13 +118,13 @@ L.Control.SliderControl = L.Control.extend({
         } else {
             console.log("Error: You have to specify a layer via new SliderControl({layer: your_layer});");
         }
-        $('#slider-min', this.sliderBoxContainer).html(this.options.markers[this.options.minValue].feature.properties[this.options.timeAttribute]);
-        $('#slider-max', this.sliderBoxContainer).html(this.options.markers[this.options.maxValue].feature.properties[this.options.timeAttribute]);
-                this.$currentStartDiv = $('#slider-current .start-time', this.sliderBoxContainer);
-        this.$currentEndDiv = $('#slider-current .end-time', this.sliderBoxContainer);
+            $('#slider-min', sliderContainer).html(this.options.markers[this.options.minValue].feature.properties[this.options.timeAttribute]);
+        $('#slider-max', sliderContainer).html(this.options.markers[this.options.maxValue].feature.properties[this.options.timeAttribute]);
+                this.$currentStartDiv = $('#slider-current .start-time', sliderContainer);
+        this.$currentEndDiv = $('#slider-current .end-time', sliderContainer);
         this._updateCurrentDiv(0,1);
 
-        return this.sliderBoxContainer;
+        return sliderContainer;
     },
     _updateCurrentDiv: function (startIdx, endIdx) {
 this.$currentStartDiv.html(this.options.markers[startIdx].feature.properties[this.options.timeAttribute]);
@@ -134,124 +136,106 @@ this.$currentStartDiv.html(this.options.markers[startIdx].feature.properties[thi
         for (i = this.options.minValue; i <= this.options.maxValue; i++) {
             map.removeLayer(this.options.markers[i]);
         }
-        this.container.remove();
+        $('#leaflet-slider').remove();
 
         map.off('mouseup',this.clearTimestamp,this);
 
     },
 
-    startSlider: function () {
-        var _options = this.options;
-        var _extractTimestamp = this.extractTimestamp;
+        startSlider: function () {
+        self = this;
+        _options = this.options;
+        _extractTimestamp = this.extractTimestamp
         var index_start = _options.minValue;
-        if(_options.showAllOnStart){
+        if (_options.showAllOnStart) {
             index_start = _options.maxValue;
-            if(_options.range) _options.values = [_options.minValue,_options.maxValue];
+            if (_options.range) _options.values = [_options.minValue, _options.maxValue];
             else _options.value = _options.maxValue;
         }
-        var timestampContainer = this.timestampContainer;
-        var that = this;
-        $(this.sliderBoxContainer).slider({
+        $("#leaflet-slider").slider({
             range: _options.range,
             value: _options.value,
             values: _options.values,
             min: _options.minValue,
             max: _options.maxValue,
-            sameDate: _options.sameDate,
             step: 1,
             slide: function (e, ui) {
                 var map = _options.map;
                 var fg = L.featureGroup();
-                if(!!_options.markers[ui.value]) {
+                if ( !! _options.markers[ui.value]) {
                     // If there is no time property, this line has to be removed (or exchanged with a different property)
-                    if(_options.markers[ui.value].feature !== undefined) {
-                        if(_options.markers[ui.value].feature.properties[_options.timeAttribute]){
-                            if(_options.markers[ui.value]){
-                                timestampContainer.style.display = "block";
-                                $(timestampContainer).html(_extractTimestamp(_options.markers[ui.value].feature.properties[_options.timeAttribute], _options));
-                            }
-                        }else {
-                            console.error("Time property "+ _options.timeAttribute +" not found in data");
-                        }
-                    }else {
-                        // set by leaflet Vector Layers
-                        if(_options.markers [ui.value].options[_options.timeAttribute]){
-                            if(_options.markers[ui.value]){
-                                timestampContainer.style.display = "block";
-                                $(timestampContainer).html( _extractTimestamp(_options.markers[ui.value].options[_options.timeAttribute], _options));
-                            }
-                        }else {
-                            console.error("Time property "+ _options.timeAttribute +" not found in data");
-                        }
-                    }
-                    var markers = [];
-                    var i;
-                    // clear markers
-                    for (i = _options.minValue; i <= _options.maxValue; i++) {
-                        if(_options.markers[i]) map.removeLayer(_options.markers[i]);
-                    }
-                    if(_options.range){
-                        // jquery ui using range
-                        for (i = ui.values[0]; i <= ui.values[1]; i++){
-                           if(_options.markers[i]) {
-                               markers.push(_options.markers[i]);
-                               map.addLayer(_options.markers[i]);
-                               fg.addLayer(_options.markers[i]);
-                           }
-                        }
-                    }else if(_options.follow > 0){
-                        for (i = ui.value - _options.follow + 1; i <= ui.value ; i++) {
-                            if(_options.markers[i]) {
-                                markers.push(_options.markers[i]);
-                                map.addLayer(_options.markers[i]);
-                                fg.addLayer(_options.markers[i]);
-                            }
-                        }
-                    }else if(_options.sameDate){
-                        var currentTime;
-                        if (_options.markers[ui.value].feature !== undefined) {
-                            currentTime = _options.markers[ui.value].feature.properties.time;
+                    if (_options.markers[ui.value].feature !== undefined) {
+                        if (_options.markers[ui.value].feature.properties[_options.timeAttribute]) {
+                            if (_options.markers[ui.value]) $('#slider-timestamp').html(
+                            _extractTimestamp(_options.markers[ui.value].feature.properties[_options.timeAttribute], _options));
                         } else {
-                            currentTime = _options.markers[ui.value].options.time;
+                            console.error("Time property " + _options.timeAttribute + " not found in data");
                         }
-                        for (i = _options.minValue; i <= _options.maxValue; i++) {
-                            if(_options.markers[i].options.time == currentTime){
-                                markers.push(_options.markers[i]);
-                                map.addLayer(_options.markers[i]);
-                            }
-                        }
-                    }else{
-                        for (i = _options.minValue; i <= ui.value ; i++) {
-                            if(_options.markers[i]) {
-                                markers.push(_options.markers[i]);
-                                map.addLayer(_options.markers[i]);
-                                fg.addLayer(_options.markers[i]);
-                            }
+                    } else {
+                        // set by leaflet Vector Layers
+                        if (_options.markers[ui.value].options[_options.timeAttribute]) {
+                            if (_options.markers[ui.value]) $('#slider-timestamp').html(
+                            _extractTimestamp(_options.markers[ui.value].options[_options.timeAttribute], _options));
+                        } else {
+                            console.error("Time property " + _options.timeAttribute + " not found in data");
                         }
                     }
 
-                    if(_options.showPopups) {
-                        that._openPopups(markers);
+                    var i;
+                    // clear markers
+                    for (i = _options.minValue; i <= _options.maxValue; i++) {
+                        if (_options.markers[i]) map.removeLayer(_options.markers[i]);
                     }
-                    that.fire('rangechanged',{
-                        markers: markers,
-                    });
-                }
-                if(_options.rezoom) {
+                    if (_options.range) {
+                        // jquery ui using range
+                        for (i = ui.values[0]; i <= ui.values[1]; i++) {
+                            if (_options.markers[i]) {
+                                map.addLayer(_options.markers[i]);
+                                fg.addLayer(_options.markers[i]);
+                            }
+                        }
+                        self._updateCurrentDiv(ui.values[0], ui.values[1]);
+                    } else if (_options.follow) {
+                        for (i = ui.value - _options.follow + 1; i <= ui.value; i++) {
+                            if (_options.markers[i]) {
+                                map.addLayer(_options.markers[i]);
+                                fg.addLayer(_options.markers[i]);
+                            }
+                        }
+                    } else {
+                        for (i = _options.minValue; i <= ui.value; i++) {
+                            if (_options.markers[i]) {
+                                map.addLayer(_options.markers[i]);
+                                fg.addLayer(_options.markers[i]);
+                            }
+                        }
+                    }
+                };
+                if (_options.rezoom) {
                     map.fitBounds(fg.getBounds(), {
                         maxZoom: _options.rezoom
                     });
                 }
             }
         });
+        if (!_options.range && _options.alwaysShowDate) {
+            $('#slider-timestamp').html(_extractTimeStamp(_options.markers[index_start].feature.properties[_options.timeAttribute], _options));
+        }
+        for (i = _options.minValue; i <= index_start; i++) {
+            _options.map.addLayer(_options.markers[i]);
+        }
+
+        for (i = _options.minValue; i <= index_start; i++) {
+            _options.map.addLayer(_options.markers[i]);
+        }
+        
         if (_options.alwaysShowDate) {
-            timestampContainer.style.display = "block";
+            sliderContainer.style.display = "block";
 
             if(_options.markers[index_start].feature !== undefined) {
                 if(_options.markers[index_start].feature.properties[_options.timeAttribute]){
                     if(_options.markers[index_start]){
-                        timestampContainer.style.display = "block";
-                        $(timestampContainer).html(_extractTimestamp(_options.markers[index_start].feature.properties[_options.timeAttribute], _options));
+                        $('#slider-timestamp').html(_extractTimestamp(_options.markers[index_start].feature.properties[_options.timeAttribute], _options));
                     }
                 }else {
                     console.error("Time property "+ _options.timeAttribute +" not found in data");
@@ -260,8 +244,7 @@ this.$currentStartDiv.html(this.options.markers[startIdx].feature.properties[thi
                 // set by leaflet Vector Layers
                 if(_options.markers [index_start].options[_options.timeAttribute]){
                     if(_options.markers[index_start]){
-                        timestampContainer.style.display = "block";
-                        $(timestampContainer).html( _extractTimestamp(_options.markers[index_start].options[_options.timeAttribute], _options));
+                        $('#slider-timestamp').html( _extractTimestamp(_options.markers[index_start].options[_options.timeAttribute], _options));
                     }
                 }else {
                     console.error("Time property "+ _options.timeAttribute +" not found in data");
@@ -283,8 +266,8 @@ this.$currentStartDiv.html(this.options.markers[startIdx].feature.properties[thi
     clearTimestamp: function(){
         //Hide the slider timestamp if not range and option alwaysShowDate is set on false
         if (!this.options.alwaysShowDate) {
-            this.timestampContainer.innerHTML = "";
-            this.timestampContainer.style.display = "none";
+            this.sliderContainer.innerHTML = "";
+            this.sliderContainer.style.display = "none";
         }
     },
 

@@ -51,24 +51,26 @@
   .leaflet-sidebar-tabs, .leaflet-sidebar-tabs > ul {
     position: absolute;
     width: 40px;
-    margin: 0;
-    padding: 0;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
     list-style-type: none; }
     .leaflet-sidebar-tabs > li, .leaflet-sidebar-tabs > ul > li {
       width: 100%;
       height: 40px;
       color: #333;
-      font-size: 12pt;
+      font-size: 18px;
       overflow: hidden;
+      padding: 10px 0 10px 0;
+      text-align: center;
       transition: all 80ms; }
       .leaflet-sidebar-tabs > li:hover, .leaflet-sidebar-tabs > ul > li:hover {
         color: #000;
-        background-color: #eee; }
+        background-color: #838383; }
       .leaflet-sidebar-tabs > li.active, .leaflet-sidebar-tabs > ul > li.active {
-        color: #fff;
-        background-color: #0074d9; }
+        color: #000;
+        background-color: #838383; }
       .leaflet-sidebar-tabs > li.disabled, .leaflet-sidebar-tabs > ul > li.disabled {
-        color: rgba(51, 51, 51, 0.4); }
+        color: #838383}
         .leaflet-sidebar-tabs > li.disabled:hover, .leaflet-sidebar-tabs > ul > li.disabled:hover {
           background: transparent; }
         .leaflet-sidebar-tabs > li.disabled > a, .leaflet-sidebar-tabs > ul > li.disabled > a {
@@ -78,7 +80,7 @@
         width: 100%;
         height: 100%;
         line-height: 40px;
-        color: inherit;
+        color: #333;
         text-decoration: none;
         text-align: center;
         cursor: pointer; }
@@ -89,7 +91,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: #fff;
   overflow-x: hidden;
   overflow-y: auto; }
   .leaflet-sidebar-left .leaflet-sidebar-content {
@@ -127,11 +129,11 @@
 .leaflet-sidebar-header {
   margin: -10px -20px 0;
   height: 40px;
-  padding: 0 20px;
-  line-height: 40px;
+  padding: 10px 10px;
+  line-height: 25px;
   font-size: 14.4pt;
-  color: #fff;
-  background-color: #0074d9; }
+  color: #ffffff;
+  background-color: #333; }
   .leaflet-sidebar-right .leaflet-sidebar-header {
     padding-left: 40px; }
 
@@ -205,7 +207,7 @@
 a.one:link, a.one:visited {
   background-color: white;
   color: black;
-  border: 2px solid #0074d9;
+  border: 2px solid #838383;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -213,5 +215,6 @@ a.one:link, a.one:visited {
 }
 
 a.one:hover, a.one:active {
-  background-color: #0074d9;
+  background-color: #838383;
   color: white;
+}

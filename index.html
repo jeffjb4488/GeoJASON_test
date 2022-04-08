@@ -1,4 +1,5 @@
-<html lang="en" >
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 
@@ -25,19 +26,21 @@
 
   
 <!--other js files-->
+<script src="js/leaflet-sidebar.js"></script>
 <script src="https://unpkg.com/leaflet.tilelayer.mbtiles@latest/Leaflet.TileLayer.MBTiles.js"></script>
 <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
 <script type="text/javascript" src="js/L.Control.ZoomBar.js"></script>
-<script src="js/leaflet-sidebar.js"></script>
 <script src="js/SliderControl.js"></script>
 
 
+
+
 <!--other css files-->
+<link rel="stylesheet" href="css/leaflet-sidebar.css"/>
 <link rel="stylesheet" href="css/general.css"/>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="css/leaflet-sidebar.css" />
 <link rel="stylesheet" href="css/L.Control.ZoomBar.css"/>
-
+<link rel="stylesheet" href="css/SliderControl.css"/>
 
 
 
@@ -45,9 +48,9 @@
   
 <style>
 html, body {
-	height: 100%;
-	margin: 0;
-}
+			height: 100%;
+			margin: 0;
+		}
   
 #map {
   width: 100%;
@@ -68,30 +71,79 @@ html, body {
   }
 </script>
 
-
 </head>
-<body>
-  <div id="map"></div>
 
+
+<body>
+<div id="map"></div>
+
+<div id="sidebar" class="leaflet-sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="leaflet-sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars center"></i></a></li>
+                <li><a href="#profile" role="tab"><i class="fa fa-bookmark"></i></a></li>
+                <li><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+                <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        <!-- add more tab panes here, copy / paste -->   
+        </div>
+
+        <!-- Tab panes -->
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane" id="home">
+                <h1 class="leaflet-sidebar-header">
+                    The History of Property Ownership in the Highlands
+                    <br> 
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+                
+
+                <p class="lorem">Project description here</p>
+
+                <p class="lorem">user directions</p>
+
+                
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="profile">
+                <h1 class="leaflet-sidebar-header">References<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+		  <br>
+		  <li>Test (2020) Title. <i>Journal</i>, Date. <a href="https://www.lansingstatejournal.com/story/sports/columnists/graham-couch/2020/05/07/lansing-area-restaurants-fight-to-survive-couch-column/3069370001/" target="_blank">Source</a> </li>
+		  
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="messages">
+                <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+		    <p><b><a class="one" href="mailto:fadat85580@nefacility.com" target="_blank">Contact Us!</a></b></p>
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="settings">
+                <h1 class="leaflet-sidebar-header">Settings<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+        </div>
+    </div>
+    
 
       <script id="rendered-js" >
 var basemap_color = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
 var basemap_satellite = 'https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=kUPH9bhggOn8sGeOtVCW';
-var overlay_1890 = 'https://map-tile.server.burne138.msu.domains/Plan_Map_of_the_Highlands_1890_best_imagery_4326_mostzoom/{z}/{x}/{y}.png';
+var overlay_1890 = 'https://map-tile.server.burne138.msu.domains/Plan_Map_of_the_Highlands_1890_best_imagery_4326_largest/{z}/{x}/{y}.png';
 
 
 var map = L.map('map', {
     editable: true,
     minZoom: 13,
-    maxZoom: 18,
+    maxZoom: 20,
     zoomControl: false}).setView([41.461070584121636, -70.56516015402862], 16);
     
 var zoom_bar = new L.Control.ZoomBar({position: 'topright'}).addTo(map);
 
 var basemapLayerColor = L.tileLayer(basemap_color, {
   noWrap: true,
-  minZoom: 10,
-  maxZoom: 18,
+  minZoom: 13,
+  maxZoom: 20,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
 }).addTo(map);
 
@@ -99,14 +151,16 @@ var basemapLayerSatellite = L.tileLayer(basemap_satellite,{
         noWrap: true,
         tileSize: 512,
         zoomOffset: -1,
-        maxZoom: 18,
-        minZoom: 10,
+        maxZoom: 20,
+        minZoom: 13,
         attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
         crossOrigin: true
       }).addTo(map);
 
 var overlayLayer1890 = L.tileLayer(overlay_1890, {
   noWrap: true,
+  maxZoom: 20,
+    minZoom: 13,
   opacity: 0.6,
   attribution: 'Historic Map, <a href="https://collections.leventhalmap.org/search/commonwealth:x059cd109" target="_blank">Boston Public Library Norman B. Leventhal Map Center'
 }).addTo(map);
@@ -122,27 +176,23 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-function onEachFeature (feature, layer) {
-	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
-	layer.bindPopup(content, {closeButton: true});
-	var tooltip = "<div style='clear: both'></div><div><h4>" + 'Lot Number ' + feature.properties.Lot_Number + ' owned by ' + feature.properties.Grantee + "</h4></div>";
-	layer.bindTooltip(tooltip);
-	layer.on('mouseover', function (e) {
-            this.openTooltip();
-            this.highlightFeature();
-        });
-    layer.on('mouseout', function (e) {
-        this.closeTooltip();
-        this.resetHighlight();
-    });
-    layer.on('dbclick', function (e) {
-        this.zoomToFeature();
-    });
-    layer.on('click', function (e){
-        this.closeTooltip();
-    });
-    };
-	      
+var info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+    this._div.innerHTML = '<h4>Lot Information </h4>' +  (props ?
+        '<b>' + 'Lot #' + props.Lot_Number + ' owned by ' + props.Grantee + ' starting on ' + props.time
+        : 'Hover over a lot');
+};
+
+info.addTo(map);
+
 function style(feature) {
 		return {
 			weight: 2,
@@ -166,13 +216,13 @@ function highlightFeature(e) {
 
 	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
 		layer.bringToFront();
-	}
+	};
 
 	info.update(layer.feature.properties);
 }
-	
-var polygons
 
+var polygons
+	
 	function resetHighlight(e) {
 		polygons.resetStyle(e.target);
 		info.update();
@@ -181,50 +231,67 @@ var polygons
 	function zoomToFeature(e) {
 		map.fitBounds(e.target.getBounds());
 	}
-	      
-$.getJSON("data/polygon_test_30_tabs.geojson",function(json){
+	
+function onEachFeature (feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+    });
+	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
+	layer.bindPopup(content, {closeButton: true});
+    };
+    
+$.getJSON("data/polygon_test_30_tabs.geojson", function (json){
 // add GeoJSON layer to the map once the file is loaded
-   	var polygons = L.geoJson(json ,{
+   polygons = L.geoJson(json ,{
 	    style: style,
-            onEachFeature: onEachFeature
-    }).addTo(map);
+        onEachFeature: onEachFeature,
+        });
          map.fitBounds(polygons.getBounds());
-       
-  
+         
 // Set the sliderControl options
-            var sliderControl1 = L.control.sliderControl( {
-                layer: polygons, //REQUIRED
-		showAllOnStart: false,
-                alwaysShowDate: true,
-                range: true,
-                showAllPopups: false, // to show all popups, instead of one, same as popup option "autoClose: false"
-                showPopups: false // to set it so, when a marker is generated by the slider, its popup doesn't automatically display
-            });
+    var sliderControl = L.control.sliderControl({
+        layer: polygons, //REQUIRED
+        alwaysShowDate: true,
+        range: true,
+        sameDate: true,
+        showAllPopups: false, // to show all popups, instead of one, same as popup option "autoClose: false"
+        showPopups: false // to set it so, when a marker is generated by the slider, its popup doesn't automatically display
+    });
 
-            // Add the slider to the map
-            map.addControl(sliderControl1);
+    // Add the slider to the map
+    map.addControl(sliderControl);
 
-            // Initialize the slider
-            sliderControl1.startSlider();
-
- 
-var legend = L.control({ position: "bottomright" });
-
-legend.onAdd = function(map) {
-  var div = L.DomUtil.create("div", "legend");
-  div.innerHTML += "<h4>Lot Ownership</h4>";
-  div.innerHTML += '<i style="background: #006d2c"></i><span>Owner Known</span><br>';
-  div.innerHTML += '<i style="background: #f2f3f4"></i><span>No Known Owner</span><br>';
-  
-  return div;
-};
-
-legend.addTo(map);
-
-
+    // Initialize the slider
+    sliderControl.startSlider();
+    
 });
 
- 
+var sidebar = L.control.sidebar({ container: 'sidebar' })
+            .addTo(map)
+            .open('home');
+		
+ // add panels dynamically to the sidebar
+        sidebar
+            .addPanel({
+                id:   'js-api',
+                tab:  '<i class="fa fa-users"></i>',
+                title: 'JS API',
+                pane: '<p>The Javascript API allows to dynamically create or modify the panel state.<p/><p><button onclick="sidebar.enablePanel(\'mail\')">enable mails panel</button><button onclick="sidebar.disablePanel(\'mail\')">disable mails panel</button></p><p><button onclick="addUser()">add user</button></b>',
+            });
+                        
+            
+	var userid = 0
+        function addUser() {
+            sidebar.addPanel({
+                id:   'user' + userid++,
+                tab:  '<i class="fa fa-user"></i>',
+                title: 'User Profile ' + userid,
+                pane: '<p>user ipsum dolor sit amet</p>',
+            });
+        };
+
 </script>
 
   

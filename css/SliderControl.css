@@ -1,0 +1,66 @@
+.ui-widget-content {
+   background: #838383!important;
+}
+
+.ui-widget-content .ui-state-default {
+   width: 18px!important;
+   height: 18px!important;
+   top: -4px!important;
+   background: black;
+   }
+
+.ui-widget-content .ui-state-active {
+    background: darkgreen !important;
+    border-color: black;
+}
+
+.ui-widget-header {
+   background: green !important;
+
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+   border-radius: 50%!important;
+}
+
+
+#leaflet-slider {
+    margin: 15px;
+    display: inline-block;
+    border-color: black;
+    
+    
+}
+#map .slider {
+    background: #FFFFFF;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
+    border-radius: 5px;
+    text-align: center;
+    padding: 8px 5px 5px 5px;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    }
+    
+#map #slider-min, #slider-max, #slider-current, #slider {
+    display: inline-block;
+    margin: 0 5px 0 5px;
+}
+
+#map .slider #slider-current {
+    position: absolute;
+    font-weight: bold;
+    color: black;
+    background-color: #FFFFFF;
+    text-shadow: 0px 0px 5px white;
+    font-size: 20px;
+    left: 390px;
+    top: 2px;
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+    width: 225px;
+    border-radius: 5px;    
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
+}
+    
