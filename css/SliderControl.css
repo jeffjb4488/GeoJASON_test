@@ -73,7 +73,42 @@
      border-radius: 5px;    
      box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
  }
+
  
+ @media(min-width: 768px) and (max-width: 899px) {
+    #map .slider {
+        position: fixed;
+        bottom: 30px;
+        left: 15px;
+        background: #FFFFFF;
+        box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
+        border-radius: 5px;
+        text-align: center;
+        padding: 5px 0px 5px 0px;
+        font-size: 14px;
+        font-weight: bold;
+        width: 375px;
+        }
+}
+
+@media(min-width: 768px) and (max-width: 899px) {
+#map .slider #slider-current {
+    position: absolute;
+    left: 375px;
+    top: 2px;
+    font-weight: bold;
+    color: black;
+    background-color: #ffffff;
+    text-shadow: 0px 0px 5px white;
+    font-size: 17px;
+    width: 225px;
+    white-space: normal;
+    text-align: center;
+    border-radius: 5px;    
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
+    }
+}
+
  @media(min-width: 400px) and (max-width: 767px) {
      #map .slider {
          position: fixed;

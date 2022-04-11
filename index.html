@@ -144,7 +144,7 @@ var basemapLayerColor = L.tileLayer(basemap_color, {
   noWrap: true,
   minZoom: 13,
   maxZoom: 20,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
+  attribution: '<div id="content-attribution">&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> </div>'
 }).addTo(map);
 
 var basemapLayerSatellite = L.tileLayer(basemap_satellite,{
@@ -153,7 +153,7 @@ var basemapLayerSatellite = L.tileLayer(basemap_satellite,{
         zoomOffset: -1,
         maxZoom: 20,
         minZoom: 13,
-        attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
+        attribution: '<div id="content-attribution">&copy; <a href="https://www.maptiler.com/" target="_blank">MapTiler</a> contributors JJB |</div>',
         crossOrigin: true
       }).addTo(map);
 
@@ -162,7 +162,7 @@ var overlayLayer1890 = L.tileLayer(overlay_1890, {
   maxZoom: 20,
     minZoom: 13,
   opacity: 0.6,
-  attribution: 'Historic Map, <a href="https://collections.leventhalmap.org/search/commonwealth:x059cd109" target="_blank">Boston Public Library Norman B. Leventhal Map Center'
+  attribution: '<div id="content-attribution">Historic Map, <a href="https://collections.leventhalmap.org/search/commonwealth:x059cd109" target="_blank">Boston Public Library Norman B. Leventhal Map Center</div>',
 }).addTo(map);
 
 var baseMaps = {
@@ -173,6 +173,8 @@ var baseMaps = {
 var overlayMaps = {
     "Historic Map": overlayLayer1890
 };
+
+
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
