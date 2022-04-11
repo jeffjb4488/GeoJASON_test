@@ -83,7 +83,7 @@
       padding: 10px 0 10px 0;
       text-align: center;
       transition: all 80ms; }
-    .leaflet-sidebar-tabs.collapsed > li, .leaflet-sidebar-tabs > ul > li {
+    .leaflet-sidebar-tabs > li, .leaflet-sidebar.collapsed .leaflet-sidebar-tabs > ul > li {
       text-align: top;
       padding: 0px 0 0px 0;
     }
