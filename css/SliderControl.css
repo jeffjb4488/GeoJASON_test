@@ -74,7 +74,7 @@
      box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
  }
  
- @media(max-width: 767px) {
+ @media(min-width: 400px) and (max-width: 767px) {
      #map .slider {
          position: fixed;
          bottom: 50px;
@@ -90,7 +90,7 @@
          }
  }
  
- @media (max-width: 767px) {
+ @media(min-width: 400px) and (max-width: 767px) {
  #map .slider #slider-current {
      position: relative;
      left: 0px;
@@ -108,7 +108,7 @@
      }
  }
 
- @media(max-width: 400px) {
+ @media(min-width:300px) and (max-width: 399px) {
     #map .slider {
         position: fixed;
         bottom: 50px;
@@ -124,7 +124,7 @@
         }
 }
 
-@media (max-width: 400px) {
+@media(min-width:300px) and (max-width: 399px) {
 #map .slider #slider-current {
     position: relative;
     left: 0px;
