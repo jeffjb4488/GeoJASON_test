@@ -63,3 +63,14 @@
   #content-attribution {display: none;}
   #content-no-attribution {display: block;}
   }
+
+  /* mobile / desktop display */  
+@media (min-width: 992px) {
+  #content-mobile {display: none;}
+  #content-desktop {display: block;}
+}
+
+@media (max-width: 991px) {
+    #content-mobile {display: block;}
+    #content-desktop {display: none;}
+}

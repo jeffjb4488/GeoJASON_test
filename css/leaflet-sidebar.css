@@ -10,36 +10,36 @@
     top: 10px;
     bottom: 93%;}
 
-    @media (min-width: 300px) and (max-width: 399px) {
+    @media screen and (min-width: 300px) and (max-width: 399px) {
       .leaflet-sidebar {
         width: 200px;
         max-width: 200px;
         bottom: 60%; } 
       }
-  @media (min-width: 400px) and (max-width: 767px) {
+  @media screen and (min-width: 400px) and (max-width: 999px) {
     .leaflet-sidebar {
       width: 305px;
       max-width: 225px;
       bottom: 60%; } 
     }
 
-    @media (min-width: 768px) {
+    @media screen and (min-width: 768px) {
     .leaflet-sidebar {
       top: 10px;
       transition: width 500ms; } 
     }
-  @media (min-width: 768px) and (max-width: 991px) {
+  @media screen and (min-width: 768px) and (max-width: 991px) {
     .leaflet-sidebar {
       width: 360px;
       max-width: 360px;
-      bottom: 550px; } 
+      bottom: 60%; } 
     }
-  @media (min-width: 992px) and (max-width: 1199px) {
+  @media screen and (min-width: 992px) and (max-width: 1199px) {
     .leaflet-sidebar {
       width: 390px;
       max-width: 390px;
       bottom: 500px; } }
-  @media (min-width: 1200px) {
+  @media screen and (min-width: 1200px) {
     .leaflet-sidebar {
       width: 460px;
       max-width: 460px;
@@ -49,13 +49,13 @@
 
 .leaflet-sidebar-left {
   left: 0; }
-  @media (min-width: 300px) {
+  @media screen and (min-width: 300px) {
     .leaflet-sidebar-left {
       left: 10px; } }
 
 .leaflet-sidebar-right {
   right: 0; }
-  @media (min-width: 300px) {
+  @media screen and (min-width: 300px) {
     .leaflet-sidebar-right {
       right: 10px; } }
 
@@ -121,7 +121,7 @@
   font-size: 14px;
   line-height: 20px; }
 
-  @media (min-width: 300px) and (max-width: 767px) {
+  @media (min-width: 300px) and (max-width: 599px) {
 .leaflet-sidebar-content {
   position: absolute;
   top: 0;
@@ -129,9 +129,22 @@
   background-color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
-  font-size: 12px;
-  line-height: 15px; }
+  font-size: 15px;
+  line-height: 20px; }
 }
+
+  @media (min-width: 600px) and (max-width: 991px) {
+.leaflet-sidebar-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 20px;
+  line-height: 24px; }
+}
+
 
   .leaflet-sidebar-left .leaflet-sidebar-content {
     left: 40px;
@@ -177,25 +190,25 @@
   .leaflet-sidebar-right .leaflet-sidebar-header {
     padding-left: 40px; }
     
-@media (min-width: 300px) and (max-width: 767px) {
-.leaflet-sidebar-header {
-  margin: -10px -20px 0;
-  height: 40px;
-  padding: 10px 10px;
-  line-height: 15px;
-  font-size: 10pt;
-  color: #ffffff;
-  background-color: #333; }
-  .leaflet-sidebar-right .leaflet-sidebar-header {
-    padding-left: 40px; } }
-
-@media (min-width: 768px) and (max-width: 900px) {
+@media (min-width: 300px) and (max-width: 599px) {
 .leaflet-sidebar-header {
   margin: -10px -20px 0;
   height: 40px;
   padding: 10px 10px;
   line-height: 15px;
   font-size: 12pt;
+  color: #ffffff;
+  background-color: #333; }
+  .leaflet-sidebar-right .leaflet-sidebar-header {
+    padding-left: 40px; } }
+
+@media screen and (min-width: 600px) and (max-width: 991px) {
+.leaflet-sidebar-header {
+  margin: -10px -20px 0;
+  height: 40px;
+  padding: 10px 10px;
+  line-height: 24px;
+  font-size: 18pt;
   color: #ffffff;
   background-color: #333; }
   .leaflet-sidebar-right .leaflet-sidebar-header {
@@ -226,23 +239,23 @@
   box-shadow: none;
   border-right: 2px solid rgba(0, 0, 0, 0.2); }
 
-@media (min-width: 300px) {
+@media screen and (min-width: 300px) {
   .leaflet-sidebar-left ~ .leaflet-control-container .leaflet-left {
     transition: left 500ms; } }
 
-    @media (min-width: 300px) and (max-width: 767px) {
+    @media screen and (min-width: 300px) and (max-width: 767px) {
     .leaflet-sidebar-left ~ .leaflet-control-container .leaflet-left {
       left: 150px; } }
 
-    @media (min-width: 768px) and (max-width: 991px) {
+    @media screen and (min-width: 768px) and (max-width: 991px) {
   .leaflet-sidebar-left ~ .leaflet-control-container .leaflet-left {
     left: 315px; } }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   .leaflet-sidebar-left ~ .leaflet-control-container .leaflet-left {
     left: 400px; } }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
   .leaflet-sidebar-left ~ .leaflet-control-container .leaflet-left {
     left: 470px; } }
 
@@ -253,23 +266,23 @@
   box-shadow: none;
   border-left: 2px solid rgba(0, 0, 0, 0.2); }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .leaflet-sidebar-right ~ .leaflet-control-container .leaflet-right {
     transition: right 500ms; } }
 
-@media (min-width: 300px) and (max-width: 767px) {
+@media screen and (min-width: 300px) and (max-width: 599px) {
   .leaflet-sidebar-right ~ .leaflet-control-container .leaflet-right {
     right: 150px; } }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media screen and (min-width: 600px) and (max-width: 991px) {
   .leaflet-sidebar-right ~ .leaflet-control-container .leaflet-right {
     right: 315px; } }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   .leaflet-sidebar-right ~ .leaflet-control-container .leaflet-right {
     right: 400px; } }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
   .leaflet-sidebar-right ~ .leaflet-control-container .leaflet-right {
     right: 470px; } }
 

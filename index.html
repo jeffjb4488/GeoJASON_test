@@ -178,22 +178,43 @@ var overlayMaps = {
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-var info = L.control();
+var infoDesktop = L.control();
+var infoMobile = L.control();
 
-info.onAdd = function (map) {
+var mql = window.matchMedia('(max-width:991px)');
+
+let mobileView = mql.matches; 
+
+infoDesktop.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+infoMobile.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
     this.update();
     return this._div;
 };
 
 // method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Lot Information </h4>' +  (props ?
+infoDesktop.update = function (props) {
+        this._div.innerHTML = '<div id="content-desktop"><h3>Lot Information</h3>' +  (props ?
         '<b>' + 'Lot #' + props.Lot_Number + ' owned by ' + props.Grantee + ' starting on ' + props.time
-        : 'Hover over a lot');
-};
+        : 'Hover over a lot</div>');
+    };
+    
+infoMobile.update = function (props) {
+        this._div.innerHTML = '<div id="content-mobile"><h2>Lot Information</h2>' +  (props ?
+        '<b>' : '<h3>Click on a lot</h3></div>');
+        };
 
-info.addTo(map);
+if (mobileView) {
+    infoMobile.addTo(map);
+} else {
+    infoDesktop.addTo(map);
+}
+
 
 function style(feature) {
 		return {
@@ -220,14 +241,16 @@ function highlightFeature(e) {
 		layer.bringToFront();
 	};
 
-	info.update(layer.feature.properties);
+	infoDesktop.update(layer.feature.properties);
+	infoMobile.update(layer.feature.properties);
 }
 
 var polygons
 	
 	function resetHighlight(e) {
 		polygons.resetStyle(e.target);
-		info.update();
+		infoDesktop.update();
+		infoMobile.update();
 	}
 
 	function zoomToFeature(e) {
