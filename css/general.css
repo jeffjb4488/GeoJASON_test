@@ -50,6 +50,14 @@
   background-color: rgba(255, 255, 255, 1);
 }
 
+@media (max-width: 991px) {
+  .leaflet-touch .leaflet-control-layers-toggle {
+  width: 60px !important;
+  height: 60px !important;
+  background-size: 40px 40px !important;
+}
+}
+
 /* display attribution */ 
 #content-attribution {display: inline-block;}
 #content-no-attribution {display: none;}
