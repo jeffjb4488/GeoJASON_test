@@ -302,20 +302,20 @@ var polygons
 		map.fitBounds(e.target.getBounds());
 	}
 	
-function onEachFeature (feature, layer) {
+  function onEachFeature (feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
         click: zoomToFeature
     });
-	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
+	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p><a href='" + feature.properties.Link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
 	layer.bindPopup(content, {closeButton: true});
     var p = layer.feature.properties;
     p.index = "Lot " + p.Lot_Number + " | " + p.Grantee + " | " + p.time;
     };
 
 
-    $.getJSON("data/polygon_test_30_tabs.geojson", function (json){
+    $.getJSON("data/test_polygon_wgs84_2.geojson", function (json){
 // add GeoJSON layer to the map once the file is loaded
    polygons = L.geoJson(json ,{
 	    style: style,
