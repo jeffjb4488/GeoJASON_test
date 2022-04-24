@@ -245,7 +245,7 @@ infoMobile.onAdd = function (map) {
 // method that we will use to update the control based on feature properties passed
 infoDesktop.update = function (props) {
         this._div.innerHTML = '<div id="content-desktop"><h3>Lot Information</h3>' +  (props ?
-        '<b>' + 'Lot #' + props.Lot_Number + ' owned by ' + props.Grantee + ' starting on ' + props.time
+        '<b>' + 'Lot #' + props.lot_number + ' owned by ' + props.grantee + ' starting on ' + props.time
         : 'Hover over a lot</div>');
     };
     
@@ -308,14 +308,14 @@ var polygons
         mouseout: resetHighlight,
         click: zoomToFeature
     });
-	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p><a href='" + feature.properties.Link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
+	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.lot_number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
 	layer.bindPopup(content, {closeButton: true});
     var p = layer.feature.properties;
-    p.index = "Lot " + p.Lot_Number + " | " + p.Grantee + " | " + p.time;
+    p.index = "Lot " + p.lot_number + " | " + p.grantee + " | " + p.time;
     };
 
 
-    $.getJSON("data/test_polygon_wgs84_2.geojson", function (json){
+    $.getJSON("data/test_polygon_wgs84_4.geojson", function (json){
 // add GeoJSON layer to the map once the file is loaded
    polygons = L.geoJson(json ,{
 	    style: style,
