@@ -308,14 +308,16 @@ var polygons
         mouseout: resetHighlight,
         click: zoomToFeature
     });
-	var content = "<div style='clear: both'></div><div><h4>" + feature.properties.lot_number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
+
+    
+	var content = "<div style='clear: both'></div><div><center><img src='images/" + feature.properties.picture + "' style='width:200px;height:300x;'></center> <br><h4>" + 'Lot number ' + feature.properties.lot_number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
 	layer.bindPopup(content, {closeButton: true});
     var p = layer.feature.properties;
     p.index = "Lot " + p.lot_number + " | " + p.grantee + " | " + p.time;
     };
 
 
-    $.getJSON("data/test_polygon_wgs84_4.geojson", function (json){
+    $.getJSON("data/test_polygon_wgs84_5.geojson", function (json){
 // add GeoJSON layer to the map once the file is loaded
    polygons = L.geoJson(json ,{
 	    style: style,
