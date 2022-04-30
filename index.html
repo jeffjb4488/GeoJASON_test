@@ -152,13 +152,15 @@ var overlay_1890 = 'https://map-tile.server.burne138.msu.domains/Plan_Map_of_the
 
 var map = L.map('map', {
     editable: true,
-    minZoom: 13,
-    maxZoom: 20,
+    minZoom: 11,
+    maxZoom: 19.5,
     zoomControl: false}).setView([41.461070584121636, -70.56516015402862], 16);
+
+    map.setMaxBounds(map.getBounds());
 
 var basemapLayerColor = L.tileLayer(basemap_color, {
   noWrap: true,
-  minZoom: 13,
+  minZoom: 11,
   maxZoom: 20,
   attribution: '<div id="content-attribution">&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> </div>'
 }).addTo(map);
@@ -168,7 +170,7 @@ var basemapLayerSatellite = L.tileLayer(basemap_satellite,{
         tileSize: 512,
         zoomOffset: -1,
         maxZoom: 20,
-        minZoom: 13,
+        minZoom: 11,
         attribution: '<div id="content-attribution">&copy; <a href="https://www.maptiler.com/" target="_blank">MapTiler</a> contributors JJB |</div>',
         crossOrigin: true
       }).addTo(map);
@@ -176,7 +178,7 @@ var basemapLayerSatellite = L.tileLayer(basemap_satellite,{
 var overlayLayer1890 = L.tileLayer(overlay_1890, {
   noWrap: true,
   maxZoom: 20,
-    minZoom: 13,
+    minZoom: 11,
   opacity: 0.6,
   attribution: '<div id="content-attribution">Historic Map, <a href="https://collections.leventhalmap.org/search/commonwealth:x059cd109" target="_blank">Boston Public Library Norman B. Leventhal Map Center</div>',
 }).addTo(map);
