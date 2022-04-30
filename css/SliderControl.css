@@ -19,12 +19,12 @@
 }
  
  .ui-widget-content .ui-state-active {
-     background: darkgreen !important;
+     background: #f0e442 !important;
      border-color: black;
  }
  
  .ui-widget-header {
-    background: green !important;
+    background: #009e73 !important;
  
  }
  

@@ -268,8 +268,8 @@ function style(feature) {
 			opacity: 1,
 			color: 'black',
 			dashArray: '3',
-			fillOpacity: 0.7,
-			fillColor: 'green',
+			fillOpacity: 0.5,
+			fillColor: '#009e73',
 		};
 	}
 
@@ -278,6 +278,7 @@ function highlightFeature(e) {
 
 	layer.setStyle({
 		weight: 5,
+    fillColor: '#f0e442',
 		color: '#666',
 		dashArray: '',
 		fillOpacity: 0.7
@@ -306,25 +307,30 @@ var polygons
   polygons.eachLayer(function(layer) {
     var feature = layer.feature;
     if (turf.booleanPointInPolygon(point, feature)) {
-      content += "<div style='clear: both'></div><div><center><img src='images/" + feature.properties.picture + "' style='width:200px;height:300x;'></center> <br><h4>" + 'Lot number ' + feature.properties.lot_number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
+      content += "<div style='clear: both'></div><div><h4>" + 'Lot number ' + feature.properties.lot_number + "</h4><center><img src='images/" + feature.properties.picture + "' style='width:200px;height:300x;'></center><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
     }
   });
-  L.popup()
+  L.popup({
+    maxHeight: 400,
+    minWidth: 220,
+    keepInView: true,    
+  })
     .setLatLng(e.latlng)
     .setContent(content)
     .openOn(map);
+    
 }
 
 function onEachFeature (feature, layer) {
   layer.on({
     mouseover: highlightFeature,
     mouseout: resetHighlight,
-    click: zoomToFeature
+    click: zoomToFeature,
   });
   
 
     
-	var content = "<div style='clear: both'></div><div><center><img src='images/" + feature.properties.picture + "' style='width:200px;height:300x;'></center> <br><h4>" + 'Lot number ' + feature.properties.lot_number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
+	var content = "<div style='clear: both'></div><div><h4>" + 'Lot number ' + feature.properties.lot_number + "</h4><center><img src='images/" + feature.properties.picture + "' style='width:200px;height:300x;'></center> <br><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
 	var p = layer.feature.properties;
     p.index = "Lot " + p.lot_number + " | " + p.grantee + " | " + p.time;
     };
