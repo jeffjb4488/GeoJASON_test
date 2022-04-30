@@ -32,6 +32,7 @@
 <script type="text/javascript" src="js/L.Control.ZoomBar.js"></script>
 <script src="js/SliderControl.js"></script>
 <script src="js/leaflet-search.src.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5/turf.min.js"></script>
 
 
 
@@ -298,21 +299,33 @@ var polygons
 		infoMobile.update();
 	}
 
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-	
-  function onEachFeature (feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        dblclick: zoomToFeature
-    });
+  function zoomToFeature(e) {
+  map.fitBounds(e.target.getBounds());
+  var point = turf.point([e.latlng.lng, e.latlng.lat]);
+  var content = '';
+  polygons.eachLayer(function(layer) {
+    var feature = layer.feature;
+    if (turf.booleanPointInPolygon(point, feature)) {
+      content += "<div style='clear: both'></div><div><center><img src='images/" + feature.properties.picture + "' style='width:200px;height:300x;'></center> <br><h4>" + 'Lot number ' + feature.properties.lot_number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
+    }
+  });
+  L.popup()
+    .setLatLng(e.latlng)
+    .setContent(content)
+    .openOn(map);
+}
+
+function onEachFeature (feature, layer) {
+  layer.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight,
+    click: zoomToFeature
+  });
+  
 
     
 	var content = "<div style='clear: both'></div><div><center><img src='images/" + feature.properties.picture + "' style='width:200px;height:300x;'></center> <br><h4>" + 'Lot number ' + feature.properties.lot_number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
-	layer.bindPopup(content, {closeButton: true});
-    var p = layer.feature.properties;
+	var p = layer.feature.properties;
     p.index = "Lot " + p.lot_number + " | " + p.grantee + " | " + p.time;
     };
 
