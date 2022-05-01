@@ -80,6 +80,16 @@ img { max-width: 100%; }
 	padding-top: 60px;
 }
 
+#btn-back-to-top {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	display: none;
+	background: #9b59b6;
+	background: rgba(155, 89, 182, 0.7);
+	border-color:rgba(0, 0, 0, 0.4)
+  }
+
 .btn-link-1 {
 	display: inline-block;
 	height: 50px;
@@ -95,7 +105,7 @@ img { max-width: 100%; }
     border-radius: 4px;
     transition: all .3s;
 }
-.btn-link-1:hover, .btn-link-1:focus, .btn-link-1:active, .btn-link-1:active:focus,
+.btn-link-1:hover, #btn-back-to-top:hover, .btn-link-1:focus, .btn-link-1:active, .btn-link-1:active:focus,
 .btn-link-1.btn-primary:not(:disabled):not(.disabled):active,
 .btn-link-1.btn-primary:not(:disabled):not(.disabled):active:focus {
 	background: #9b59b6;
@@ -180,8 +190,8 @@ img { max-width: 100%; }
 .navbar-expand-md .navbar-nav .nav-link { padding-left: 1rem; padding-right: 1rem; }
 
 .navbar-brand {
-	width: 136px;
-	background: url(../img/logo.png) left center no-repeat;
+	width: 440px;
+	background: url(../img/OBHH_logo_Recoleta_flat_white_small.png) left center no-repeat;
 	border: 0;
 	text-indent: -99999px;
 }
