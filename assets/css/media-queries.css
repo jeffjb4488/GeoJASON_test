@@ -85,7 +85,7 @@ only screen and (                min-resolution: 2dppx) {
 	
 	/* logo */
     .navbar-brand {
-    	background-image: url(../img/logo.png) !important; background-repeat: no-repeat !important; background-size: 136px 39px !important;
+    	background-image: url(../img/OBHH_logo_Recoleta_flat_white_mobile.png) !important; background-repeat: no-repeat !important; background-size: 136px 39px !important;
     }
 	
 }
