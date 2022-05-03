@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/media-queries.css">
+		<link rel="stylesheet" href="css/form-style.css"/>
 
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="assets/ico/favicon.png">
@@ -402,89 +403,42 @@
         <!-- Blog -->
         <div class="blog-container section-container">
 	        <div class="container">
-	        	
-	            <div class="row">
-	                <div class="col blog section-description wow fadeIn">
-	                    <h2>The Blog</h2>
-	                    <div class="divider-1 wow fadeInUp"><span></span></div>
-	                </div>
-	            </div>
-	            
-	            <div class="row">
-	                <div class="col-md-6 blog-box wow fadeInLeft">
-	                	<div class="row">
-	                		<div class="col-md-3">
-	                			<div class="blog-box-image">
-	                				<img src="assets/img/blog/1.jpg" alt="" data-at2x="assets/img/blog/1.jpg">
-	                			</div>
-	                		</div>
-	                		<div class="col-md-9">
-	                			<h3><a href="#">Ut wisi enim ad minim</a> <i class="fas fa-angle-right"></i></h3>
-	                			<div class="blog-box-date"><i class="far fa-calendar"></i> 17 September 2018</div>
-		                    	<p>
-		                    		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
-		                    	</p>
-	                		</div>
-	                	</div>
-	                </div>
-	                <div class="col-md-6 blog-box wow fadeInLeft">
-	                	<div class="row">
-	                		<div class="col-md-3">
-	                			<div class="blog-box-image">
-	                				<img src="assets/img/blog/2.jpg" alt="" data-at2x="assets/img/blog/2.jpg">
-	                			</div>
-	                		</div>
-	                		<div class="col-md-9">
-	                			<h3><a href="#">Sed do eiusmod tempor</a> <i class="fas fa-angle-right"></i></h3>
-	                			<div class="blog-box-date"><i class="far fa-calendar"></i> 13 August 2018</div>
-		                    	<p>
-		                    		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
-		                    	</p>
-	                		</div>
-	                	</div>
-	                </div>
-	            </div>
-	            
-	            <div class="row">
-	                <div class="col-md-6 blog-box wow fadeInLeft">
-	                	<div class="row">
-	                		<div class="col-md-3">
-	                			<div class="blog-box-image">
-	                				<img src="assets/img/blog/3.jpg" alt="" data-at2x="assets/img/blog/3.jpg">
-	                			</div>
-	                		</div>
-	                		<div class="col-md-9">
-	                			<h3><a href="#">Quis nostrud exerci tat</a> <i class="fas fa-angle-right"></i></h3>
-	                			<div class="blog-box-date"><i class="far fa-calendar"></i> 26 July 2018</div>
-		                    	<p>
-		                    		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
-		                    	</p>
-	                		</div>
-	                	</div>
-	                </div>
-	                <div class="col-md-6 blog-box wow fadeInLeft">
-	                	<div class="row">
-	                		<div class="col-md-3">
-	                			<div class="blog-box-image">
-	                				<img src="assets/img/blog/4.jpg" alt="" data-at2x="assets/img/blog/4.jpg">
-	                			</div>
-	                		</div>
-	                		<div class="col-md-9">
-	                			<h3><a href="#">Minim veniam quis nostrud</a> <i class="fas fa-angle-right"></i></h3>
-	                			<div class="blog-box-date"><i class="far fa-calendar"></i> 09 June 2018</div>
-		                    	<p>
-		                    		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.
-		                    	</p>
-	                		</div>
-	                	</div>
-	                </div>
-	            </div>
-	            
-	            <div class="row">
-	            	<div class="col section-bottom-button wow fadeInUp">
-                        <a class="btn btn-primary btn-link-3" href="#">Visit the blog</a>
-	            	</div>
-	            </div>
+	        	<br>
+				<form action="/php-example.php" method="post">
+					<p>Add information here:</p>
+					<ul>
+						<li>
+							<label for=null></label>
+							<input type="text" id="XX" name="XX" />
+						</li>
+						<li>
+							<label for="name">Name:</label>
+							<input type="text" id="name" name="user_name" />
+						</li>
+						<li>
+							<label for="mail">E-mail:</label>
+							<input type="email" id="mail" name="user_mail" />
+						</li>
+						<li>
+							<label for="msg">Message:</label>
+							<textarea id="msg" name="user_message"></textarea>
+						</li>
+						<li class="button">
+							<button type="submit">Send your message</button>
+						</li>
+						<li>
+							<label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+      						<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
+						</li>
+						<li>
+							<li class="preview">
+							<p>No files currently selected for upload</p>	
+						</li>
+						<li class="button">
+							<button>Submit</button>
+						</li>
+					</ul>
+				</form>
 
 	        </div>
         </div>
@@ -532,6 +486,7 @@
         <script src="assets/js/retina-1.1.0.min.js"></script>
         <script src="assets/js/waypoints.min.js"></script>
         <script src="assets/js/scripts.js"></script>
+		<script src="js/form-script.js"></script>
 
     </body>
 
