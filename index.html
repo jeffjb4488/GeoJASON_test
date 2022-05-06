@@ -117,8 +117,9 @@ html, body {
                     The overall goal of the Oak Bluff’s Historic Highlands project is to make the history of property ownership in the Highlands visible and accessible the present-day community, descendant community members, and community heritage experts, like the African American Heritage Trail of Martha’s Vineyard, the Oak Bluffs Polar Bears, and the Cottagers. Users of the map can explore how the community grew and changed over time, explore this history of the property their family owns, or view where their friends and family lived in the past. 
                     <br>
                     <br>
-                    The map is designed to facilitate conversations about these histories, answer questions about property ownership and land transfers, and, eventually, to record memories shared through these discussions. As secondary goal of the map is to facilitate conversations about cultural heritage, preservation, and initiate conversations about utilizing archaeology as another tool with which the community can preserve, learn about, and share its history.</p>
+                    The map is designed to facilitate conversations about these histories, answer questions about property ownership and land transfers, and, eventually, to record memories shared through these discussions. As secondary goal of the map is to facilitate conversations about cultural heritage, preservation, and initiate conversations about utilizing archaeology as another tool with which the community can preserve, learn about, and share its history.
                     <br>
+                  </p>
                 
 
             </div>
@@ -128,9 +129,12 @@ html, body {
 		            <p class="lorem">The map was built using Leafletsjs, an opensource JavaScript library for creating web mapping services and projects. After opening the map users will see the full extend of the lots owned and lived on since the Highlands area was subdivided in 1870. For the test version this is only thirty lots. 
                     <br>
                     <br>
-                    Users will be able to interact with the map by adjusting the time slider to view the community at a specific time span, clicking on lots to reveal popup with additional information, use the search box to find specific lots or individuals, and switch the historic map layer on and off. Users can also follow a link in each popup to a webpage the provides detailed histories on each lot, the people who owned or lived at them. There is a test version of this webpage attached to Lot 4. As the goal of this project was to develop a test version of a later map there is a considerable amount of missing data. Now that the framework has been completed, the next steps are to scale up the map with more data on each lot and to add additional data beyond deed records. The final version of this map will include information on hundreds of lots from 1870 – 1950 and will live on the website of the African American Heritage Trail of Martha’s Vineyard.</p>
+                    Users will be able to interact with the map by adjusting the time slider to view the community at a specific time span, clicking on lots to reveal popup with additional information, use the search box to find specific lots or individuals, and switch the historic map layer on and off. Users can also follow a link in each popup to a webpage the provides detailed histories on each lot, the people who owned or lived at them. There is a test version of this webpage attached to Lot 4. As the goal of this project was to develop a test version of a later map there is a considerable amount of missing data. Now that the framework has been completed, the next steps are to scale up the map with more data on each lot and to add additional data beyond deed records. The final version of this map will include information on hundreds of lots from 1870 – 1950 and will live on the website of the African American Heritage Trail of Martha’s Vineyard.
                     <br>
-		  
+                    <br>
+                    his map was made by Jeffrey Burnett, PhD Student at Michigan State University during the author's 2021-2022 CHI fellowship. The author worked with the African American Trail of Martha's Vineyard, the Dukes County Registry of Deeds, CHI director Ethan Watrall, and CHI fellows and alumni to produce this map. This is a trial version of a future map licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+                    <br>
+                </p>
             </div>
                 
             <div class="leaflet-sidebar-pane" id="citations">
@@ -140,7 +144,7 @@ html, body {
           <li>Cromwell, "The History of Oak Bluffs as a Popular Resort for Blacks," Dukes County Intelligencer 26, no. 1 (August 1984)</li>
           <li>Cromwell 1984; Robert C. Hayden, <i>African-Americans on Martha's Vineyard & Nantucket: A history of people, places and events</i>, Select Publications, 1999; Jocelyn Coleman Walton, “Life in the Highlands,” Martha’s Vineyard Magazine, 2016; Elaine Cawley Weintraub, <i>Lighting the Trail: The African American Heritage of Martha's Vineyard</i>, 2015.</li>
 		  
-		  <ol>
+		  </ol>
             </div>
 
             <div class="leaflet-sidebar-pane" id="messages">
@@ -166,8 +170,9 @@ var map = L.map('map', {
     minZoom: 11,
     maxZoom: 19.5,
     zoomControl: false}).setView([41.461070584121636, -70.56516015402862], 16);
-
     map.setMaxBounds(map.getBounds());
+
+map.attributionControl.addAttribution('<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0; max-width:60px; vertical-align: bottom" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>');
 
 var basemapLayerColor = L.tileLayer(basemap_color, {
   noWrap: true,
