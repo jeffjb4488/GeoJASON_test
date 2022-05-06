@@ -95,7 +95,7 @@ html, body {
         <div class="leaflet-sidebar-content">
             <div class="leaflet-sidebar-pane" id="home">
                 <h1 class="leaflet-sidebar-header">
-                    The History of Property Ownership in the Highlands
+                    Oak Bluffs Historic Higlands Map
                     <br> 
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
@@ -328,7 +328,7 @@ var polygons
       content += "<div style='clear: both'></div><div><h4>" + 'Lot number ' + feature.properties.lot_number + "</h4><center><img src='images/" + feature.properties.picture + "' style='width:200px;height:300x;'></center><p>" + feature.properties.time + "</p><p>" + feature.properties.grantee + "</p><a href='" + feature.properties.link + "' target='_blank'>" + "Click here for more info" + "</a>" + "</p></div>";
     }
   });
-  L.popup({
+  var popup = L.popup({
     maxHeight: 400,
     minWidth: 220,
     keepInView: true,    
@@ -358,7 +358,7 @@ function onEachFeature (feature, layer) {
 // add GeoJSON layer to the map once the file is loaded
    polygons = L.geoJson(json ,{
 	    style: style,
-        onEachFeature: onEachFeature,
+      onEachFeature: onEachFeature,
         });map.fitBounds(polygons.getBounds());
 
 // Set the sliderControl options
@@ -390,10 +390,15 @@ searchControl.on('search:locationfound', function(e) {
 		//console.log('search:locationfound', );
 
 		//map.removeLayer(this._markerSearch)
-
-		e.layer.setStyle({fillColor: '#3f0', color: '#0f0'});
-		if(e.layer._popup)
-			e.layer.openPopup();
+    layer.fire('click', {
+      latlng: latlng
+    });
+		e.layer.setStyle({weight: 5,
+    fillColor: '#f0e442',
+		color: '#666',
+		dashArray: '',
+		fillOpacity: 0.7});
+      
 
 	}).on('search:collapsed', function(e) {
 
