@@ -122,7 +122,7 @@ L.Control.SliderControl = L.Control.extend({
         $('#slider-max', sliderContainer).html(this.options.markers[this.options.maxValue].feature.properties[this.options.timeAttribute]);
                 this.$currentStartDiv = $('#slider-current .start-time', sliderContainer);
         this.$currentEndDiv = $('#slider-current .end-time', sliderContainer);
-        this._updateCurrentDiv(0,1);
+        this._updateCurrentDiv(0,0);
 
         return sliderContainer;
     },

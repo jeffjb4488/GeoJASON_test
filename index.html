@@ -390,9 +390,8 @@ searchControl.on('search:locationfound', function(e) {
 		//console.log('search:locationfound', );
 
 		//map.removeLayer(this._markerSearch)
-    layer.fire('click', {
-      latlng: latlng
-    });
+    if(e.layer._popup)
+			e.layer.openPopup(); 
 		e.layer.setStyle({weight: 5,
     fillColor: '#f0e442',
 		color: '#666',
